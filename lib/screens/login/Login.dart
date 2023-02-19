@@ -1,3 +1,4 @@
+import 'package:coin_flutter/screens/bottomNavigator/bottomNavigator.dart';
 import 'package:coin_flutter/screens/home/homePage.dart';
 import 'package:coin_flutter/screens/login/Register.dart';
 import 'package:coin_flutter/providers/Screens/Home/Home.dart';
@@ -33,6 +34,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF1F4FF),
       body: Center(
           child: Column(
         children: [
@@ -80,8 +82,8 @@ void _Login(String email, String password, BuildContext context) async {
   try {
     if (await _providerState.LoginUser(email, password)) {
       await _providerState.getCoinId();
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => CustomBottomNavigationBar()));
     }
   } catch (e) {
     print(e);
