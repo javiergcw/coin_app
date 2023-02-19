@@ -1,4 +1,5 @@
-import 'package:coin_flutter/providers/Screens/login/Register.dart';
+import 'package:coin_flutter/screens/home/homePage.dart';
+import 'package:coin_flutter/screens/login/Register.dart';
 import 'package:coin_flutter/providers/Screens/Home/Home.dart';
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
 import 'package:flutter/foundation.dart';
@@ -59,7 +60,7 @@ class _LoginState extends State<Login> {
             },
             child: GestureDetector(
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => ProviderRegistration()));
@@ -79,8 +80,8 @@ void _Login(String email, String password, BuildContext context) async {
   try {
     if (await _providerState.LoginUser(email, password)) {
       await _providerState.getCoinId();
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => ProviderDashboard()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
     }
   } catch (e) {
     print(e);

@@ -1,4 +1,4 @@
-import 'package:coin_flutter/providers/Screens/login/Login.dart';
+import 'package:coin_flutter/screens/login/Login.dart';
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
 import 'package:flutter/material.dart';
 
@@ -15,11 +15,12 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
 
-  void _signUp(String email, String password, BuildContext context) async {
+  void _signUp(
+      String email, String password, String name, BuildContext context) async {
     ProviderState _providerState =
         Provider.of<ProviderState>(context, listen: false);
     try {
-      if (await _providerState.signUpUser(email, password)) {
+      if (await _providerState.signUpUser(email, password, name)) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Login()));
       }
@@ -149,7 +150,8 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
                               // Removes toast after 2 seconds
                               // RegisterUser();
 
-                              _signUp(email.text, password.text, context);
+                              _signUp(email.text, password.text, firstn.text,
+                                  context);
                             },
                             child: Text('Sign-Up')),
                       ],

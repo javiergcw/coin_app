@@ -18,9 +18,10 @@ Future<List> getRewards() async {
   return rewards;
 }
 
-Future<void> addPointProfile(String uid) async {
+Future<void> addPointProfile(String uid, String name) async {
   await db.collection("points").add({
     "id": uid,
     "value": 0,
+    "name": name,
   });
 }

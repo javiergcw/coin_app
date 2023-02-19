@@ -21,6 +21,30 @@ class ProviderState extends ChangeNotifier {
 
   FirebaseAuth _auth = FirebaseAuth.instance;
 
+  Future<List> getBuysId() async {
+    List buys = [];
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    final CollectionReference _collectionRef =
+        _firestore.collection('shopping');
+
+    QuerySnapshot querySnapshot =
+        await _collectionRef.where('id', isEqualTo: _uid).get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      querySnapshot.docs.forEach((element) {
+        buys.add(element.data());
+      });
+
+      debugPrint("------------ 8 52");
+      debugPrint(buys.toString());
+      debugPrint("------------ 8 52");
+      return buys;
+    } else {
+      // puedes lanzar una excepción o devolver un valor por defecto
+      throw Exception('No se encontraron documentos con id 10');
+    }
+  }
+
   Future<List> getCoinId() async {
     List points = [];
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -33,8 +57,6 @@ class ProviderState extends ChangeNotifier {
       querySnapshot.docs.forEach((element) {
         points.add(element.data());
       });
-      debugPrint("-----------");
-      debugPrint(points.toString());
       return points;
     } else {
       // puedes lanzar una excepción o devolver un valor por defecto
@@ -42,7 +64,7 @@ class ProviderState extends ChangeNotifier {
     }
   }
 
-  Future<bool> signUpUser(String email, String password) async {
+  Future<bool> signUpUser(String email, String password, String name) async {
     bool retval = false;
 
     try {
@@ -52,7 +74,7 @@ class ProviderState extends ChangeNotifier {
       if (userCredential.user != null) {
         _uid = userCredential.user!.uid;
         _email = userCredential.user!.email!;
-        addPointProfile(_uid!);
+        addPointProfile(_uid!, name);
         return retval = true;
       }
     } catch (e) {
