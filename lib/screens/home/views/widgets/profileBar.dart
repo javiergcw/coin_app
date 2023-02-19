@@ -10,9 +10,64 @@ class ProfileBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProviderState _providerState =
-        Provider.of<ProviderState>(context, listen: false);
-    return SizedBox(
+    final model = Provider.of<ProviderState>(context, listen: false);
+
+    return FutureBuilder<void>(
+        future: model.getInfoUser(),
+        builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+          if (snapshot.hasError) {
+            return const Center(
+              child: Text('Error al obtener datos de Firestore'),
+            );
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return Column(
+            children: model.infoUserWithId
+                .map(
+                  (item) => Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Hola ${item['name']}"),
+                          Row(
+                            children: [
+                              Text('Tus puntos: ${item['value']}'),
+                              Container(
+                                child: IconButton(
+                                  onPressed: () {
+                                    PopUp().MessageWhats(context);
+                                  },
+                                  icon: const Icon(
+                                    Icons.question_mark,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Container(
+                        width: 80,
+                        height: 80,
+                        color: Colors.amber,
+                      )
+                    ],
+                  ),
+                )
+                .toList(),
+          );
+        });
+  }
+}
+     /* SizedBox(
       height: MediaQuery.of(context).size.width / 5.5,
       child: FutureBuilder(
         future: _providerState.getCoinId(),
@@ -74,5 +129,5 @@ class ProfileBar extends StatelessWidget {
         })),
       ),
     );
-  }
-}
+   }
+}*/

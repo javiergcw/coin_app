@@ -3,47 +3,47 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coin_flutter/services/firebase_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 
 class ProviderState extends ChangeNotifier {
   String? _uid;
   String? _email;
   List? _DataPoints;
-  int? _points;
+  List<Map<String, dynamic>> _rewards = [];
+  List<Map<String, dynamic>> _buysWithId = [];
+  List<Map<String, dynamic>> _infoUserWithId = [];
 
+  int? _points;
   String? get getUid => _uid;
   String? get getEmail => _email;
   List? get getListPoints => _DataPoints;
   int? get points => _points;
+  List<Map<String, dynamic>> get rewards => _rewards;
+  List<Map<String, dynamic>> get buysWithId => _buysWithId;
+  List<Map<String, dynamic>> get infoUserWithId => _infoUserWithId;
+
+  set rewards(List<Map<String, dynamic>> value) {
+    _rewards = value;
+    notifyListeners();
+  }
+
+  set buysWithId(List<Map<String, dynamic>> value) {
+    _buysWithId = value;
+    notifyListeners();
+  }
+
+  void infoUserWithIdV() {
+    notifyListeners();
+  }
+
+  set infoUserWithId(List<Map<String, dynamic>> value) {
+    _infoUserWithId = value;
+    notifyListeners();
+  }
 
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   FirebaseAuth _auth = FirebaseAuth.instance;
-
-  Future<List> getBuysId() async {
-    List buys = [];
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    final CollectionReference _collectionRef =
-        _firestore.collection('shopping');
-
-    QuerySnapshot querySnapshot =
-        await _collectionRef.where('id', isEqualTo: _uid).get();
-
-    if (querySnapshot.docs.isNotEmpty) {
-      querySnapshot.docs.forEach((element) {
-        buys.add(element.data());
-      });
-
-      debugPrint("------------ 8 52");
-      debugPrint(buys.toString());
-      debugPrint("------------ 8 52");
-      return buys;
-    } else {
-      // puedes lanzar una excepción o devolver un valor por defecto
-      throw Exception('No se encontraron documentos con id 10');
-    }
-  }
 
   Future<List> getCoinId() async {
     List points = [];
@@ -102,8 +102,138 @@ class ProviderState extends ChangeNotifier {
 
     return retval;
   }
-}
 
+  Future<List<Map<String, dynamic>>> getInfoUser() async {
+    final CollectionReference collectionInfoUser =
+        FirebaseFirestore.instance.collection('points');
+
+    QuerySnapshot<Object?> snapshot =
+        await collectionInfoUser.where('id', isEqualTo: _uid).get();
+
+    List<QueryDocumentSnapshot<Object?>> documentSnapshots = snapshot.docs;
+
+    List<Map<String, dynamic>> infoUserWithId = documentSnapshots
+        .map((document) => document.data() as Map<String, dynamic>)
+        .toList();
+
+    this.infoUserWithId = infoUserWithId;
+    return infoUserWithId;
+
+    ///
+  }
+
+  Future<List<Map<String, dynamic>>> getRewards() async {
+    final CollectionReference collectionRewards =
+        FirebaseFirestore.instance.collection('rewards');
+
+    QuerySnapshot<Object?> snapshot = await collectionRewards.get();
+    List<QueryDocumentSnapshot<Object?>> documentSnapshots = snapshot.docs;
+
+    List<Map<String, dynamic>> rewards = documentSnapshots
+        .map((document) => document.data() as Map<String, dynamic>)
+        .toList();
+
+    this.rewards = rewards;
+    return rewards;
+  }
+
+  Future<List<Map<String, dynamic>>> getBuysWithId() async {
+    final CollectionReference collectionBuysWithId =
+        FirebaseFirestore.instance.collection('shopping');
+
+    QuerySnapshot<Object?> snapshot =
+        await collectionBuysWithId.where('id', isEqualTo: _uid).get();
+    List<QueryDocumentSnapshot<Object?>> documentSnapshots = snapshot.docs;
+
+    List<Map<String, dynamic>> buysWithId = documentSnapshots
+        .map((document) => document.data() as Map<String, dynamic>)
+        .toList();
+    this.buysWithId = buysWithId;
+    return buysWithId;
+  }
+}
+ /* List buys = [];
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    final CollectionReference _collectionRef =
+        _firestore.collection('shopping');
+
+    QuerySnapshot querySnapshot =
+        await _collectionRef.where('id', isEqualTo: _uid).get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      querySnapshot.docs.forEach((element) {
+        buys.add(element.data());
+      });
+
+      debugPrint("------------ 8 52");
+      debugPrint(buys.toString());
+      debugPrint("------------ 8 52");
+      return buys;
+    } else {
+      // puedes lanzar una excepción o devolver un valor por defecto
+      throw Exception('No se encontraron documentos con id 10');
+    } */
+
+
+/* Future<List> getBuysId() async {
+    List buys = [];
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    final CollectionReference _collectionRef =
+        _firestore.collection('shopping');
+
+    QuerySnapshot querySnapshot =
+        await _collectionRef.where('id', isEqualTo: _uid).get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      querySnapshot.docs.forEach((element) {
+        buys.add(element.data());
+      });
+
+      debugPrint("------------ 8 52");
+      debugPrint(buys.toString());
+      debugPrint("------------ 8 52");
+      return buys;
+    } else {
+      // puedes lanzar una excepción o devolver un valor por defecto
+      throw Exception('No se encontraron documentos con id 10');
+    }
+  }
+ */
+
+
+    /*  List rewards = [];
+    CollectionReference collectionReferenceRewards = db.collection('rewards');
+
+    QuerySnapshot queryRewards = await collectionReferenceRewards.get();
+
+    queryRewards.docs.forEach((document) {
+      rewards.add(document.data());
+    });
+
+    return rewards; */
+
+ 
+/*  List buys = [];
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    final CollectionReference _collectionRef =
+        _firestore.collection('shopping');
+
+    QuerySnapshot querySnapshot =
+        await _collectionRef.where('id', isEqualTo: _uid).get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      querySnapshot.docs.forEach((element) {
+        buys.add(element.data());
+      });
+
+      debugPrint("------------ 8 52");
+      debugPrint(buys.toString());
+      debugPrint("------------ 8 52");
+      return buys;
+    } else {
+      // puedes lanzar una excepción o devolver un valor por defecto
+      throw Exception('No se encontraron documentos con id 10');
+    } */
 
  /*  Future<bool> getPoints() async {
     bool retval = false;

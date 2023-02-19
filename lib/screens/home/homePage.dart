@@ -1,8 +1,11 @@
+import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
 import 'package:coin_flutter/screens/home/views/bodyButtons/buys.dart';
-import 'package:coin_flutter/screens/home/views/bodyButtons/shop.dart';
+import 'package:coin_flutter/screens/home/views/bodyButtons/rules.dart';
+import 'package:coin_flutter/screens/home/views/bodyButtons/shop/shop.dart';
 import 'package:coin_flutter/screens/home/views/widgets/popUp.dart';
 import 'package:coin_flutter/screens/home/views/widgets/profileBar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,14 +20,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mi aplicación'),
+        title: const Text('Mi aplicación'),
       ),
-      body: Container(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: <Widget>[
               const ProfileBar(),
+
               // Mostrar los botones
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -78,17 +82,11 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               // Mostrar el contenido correspondiente al botón seleccionado
-              Expanded(
-                child: _selectedButton == 0
-                    ? SingleChildScrollView(child: Shop())
-                    : _selectedButton == 1
-                        ? Buys()
-                        : Container(
-                            child: Center(
-                              child: Text('Página de objetos'),
-                            ),
-                          ),
-              ),
+              _selectedButton == 0
+                  ? Shop()
+                  : _selectedButton == 1
+                      ? Buys()
+                      : Rules()
             ],
           ),
         ),
