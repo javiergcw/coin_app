@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
 import 'package:coin_flutter/screens/home/views/widgets/popUp.dart';
+import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,31 +35,97 @@ class ProfileBar extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Hola ${item['name']}"),
+                          Image.asset(
+                            Assets.logoMain,
+                            width: MediaQuery.of(context).size.width / 2.5,
+                          ),
+                          UISizedBox.gapH20,
                           Row(
                             children: [
-                              Text('Tus puntos: ${item['value']}'),
                               Container(
-                                child: IconButton(
-                                  onPressed: () {
-                                    PopUp().MessageWhats(context);
-                                  },
-                                  icon: const Icon(
-                                    Icons.question_mark,
-                                    color: Colors.black,
+                                  height: 31,
+                                  width: MediaQuery.of(context).size.height / 8,
+                                  decoration: BoxDecoration(
+                                    gradient: const LinearGradient(
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                      colors: [
+                                        UIColors.yellow,
+                                        UIColors.orange,
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
-                                ),
-                              )
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        child: Container(
+                                          height: 25,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          child: Image.asset(Assets.coin),
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      Text(
+                                        '${item['value']}',
+                                        style: white12,
+                                      ),
+                                      UISizedBox.gapW20,
+                                    ],
+                                  )),
+                              UISizedBox.gapW10,
+                              GestureDetector(
+                                child: Container(
+                                    height: 31,
+                                    width: 31,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50.0),
+                                      border: Border.all(
+                                        width: 2.0,
+                                        style: BorderStyle.solid,
+                                        color: Colors.transparent,
+                                      ),
+                                      gradient: const LinearGradient(
+                                        colors: [
+                                          UIColors.redQ,
+                                          UIColors.redW,
+                                        ],
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        tileMode: TileMode.clamp,
+                                      ),
+                                    ),
+                                    child: Image.asset(Assets.alert)),
+                              ),
                             ],
                           ),
                         ],
                       ),
                       const Spacer(),
                       Container(
-                        width: 80,
-                        height: 80,
-                        color: Colors.amber,
-                      )
+                        width: MediaQuery.of(context).size.width / 4.4,
+                        height: MediaQuery.of(context).size.width / 4.6,
+                        decoration: BoxDecoration(
+                          color: UIColors.redMain,
+                          borderRadius: BorderRadius.circular(15.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: UIColors.redMain.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 8,
+                              offset: const Offset(
+                                  0, 0), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Image.asset(Assets.avatar01),
+                      ),
                     ],
                   ),
                 )

@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
-import 'package:coin_flutter/screens/home/homePage.dart';
 import 'package:coin_flutter/screens/login/Login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,7 +19,7 @@ void main() async {
           create: (_) => ProviderState(),
         ),
       ],
-      child: MyProviderApp(),
+      child: const MyProviderApp(),
     ),
   );
 }

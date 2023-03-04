@@ -17,7 +17,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     // Aquí se agregarían las diferentes vistas de la aplicación
     // por ejemplo: HomePage(), ProfilePage(), etc.
     HomePage(),
-    Profile(),
+    QRViewExample(),
+
     Quizes(),
   ];
 
@@ -26,11 +27,11 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color(0xffF1F4FF),
         ),
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40),
               topRight: Radius.circular(40),
@@ -53,20 +54,20 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             items: [
               BottomNavigationBarItem(
                 icon: Container(
-                  padding: EdgeInsets.all(0),
+                  padding: const EdgeInsets.all(0),
                   child: Column(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(6),
+                        padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
                           color: _currentIndex == 0
                               ? Colors.red
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Icon(Icons.home),
+                        child: const Icon(Icons.home),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Container(
                         height: 5,
                         width: 5,
@@ -84,20 +85,20 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               ),
               BottomNavigationBarItem(
                 icon: Container(
-                  padding: EdgeInsets.all(0),
+                  padding: const EdgeInsets.all(0),
                   child: Column(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(6),
+                        padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
                           color: _currentIndex == 1
                               ? Colors.red
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Icon(Icons.person),
+                        child: const Icon(Icons.person),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Container(
                         height: 5,
                         width: 5,
@@ -115,20 +116,20 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               ),
               BottomNavigationBarItem(
                 icon: Container(
-                  padding: EdgeInsets.all(0),
+                  padding: const EdgeInsets.all(0),
                   child: Column(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(6),
+                        padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
                           color: _currentIndex == 2
                               ? Colors.red
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Icon(Icons.quiz),
+                        child: const Icon(Icons.quiz),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Container(
                         height: 5,
                         width: 5,

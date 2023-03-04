@@ -4,6 +4,7 @@ import 'package:coin_flutter/screens/home/homePage.dart';
 import 'package:coin_flutter/screens/home/views/bodyButtons/shop/finish.dart';
 import 'package:coin_flutter/screens/home/views/widgets/popUp.dart';
 import 'package:coin_flutter/services/firebase_service.dart';
+import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,49 +30,58 @@ class Shop extends StatelessWidget {
             );
           }
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Tienda'),
-              Column(
-                children: model.rewards
-                    .map(
-                      (item) => SizedBox(
-                        width: double.infinity,
-                        height: 120,
-                        child: Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width: 40,
-                                  height: 40,
-                                  child: Image.network(item['Image']),
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(item['Name'].toString(),
-                                        style: const TextStyle(fontSize: 16)),
-                                    Text("Precio ${item['Value'].toString()}",
-                                        style: const TextStyle(fontSize: 16)),
-                                  ],
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    compareCoins(model.getUid!.toString(),
-                                        item['Id'], context);
-                                  },
-                                  child: const Text('Comprar'),
-                                )
-                              ],
+              const Text(
+                'Tienda',
+                style: titleBlack,
+              ),
+              Wrap(
+                children: [],
+              )
+              /*   Column(
+                  children: model.rewards
+                      .map(
+                        (item) => SizedBox(
+                          width: double.infinity,
+                          height: 120,
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: 40,
+                                    height: 40,
+                                    child: Image.network(item['Image']),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(item['Name'].toString(),
+                                          style: const TextStyle(fontSize: 16)),
+                                      Text("Precio ${item['Value'].toString()}",
+                                          style: const TextStyle(fontSize: 16)),
+                                    ],
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      compareCoins(model.getUid!.toString(),
+                                          item['Id'], context);
+                                    },
+                                    child: const Text('Comprar'),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    )
-                    .toList(),
-              ),
+                      )
+                      .toList(),
+                ),
+               */
             ],
           );
         });
