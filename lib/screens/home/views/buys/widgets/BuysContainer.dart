@@ -24,7 +24,7 @@ class BuyContainerActive extends StatelessWidget {
                   color: UIColors.green.withOpacity(0.5),
                   spreadRadius: 2,
                   blurRadius: 8,
-                  offset: Offset(0, 0), // changes position of shadow
+                  offset: const Offset(0, 0), // changes position of shadow
                 ),
               ],
               color: UIColors.green,
@@ -35,29 +35,22 @@ class BuyContainerActive extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              UISizedBox.gapH8,
+              UISizedBox.gapH14,
               const Text(
                 "Lapiz marca mongol",
+                style: titleHistorial,
               ),
               UISizedBox.gapH10,
               Row(
                 children: [
-                  Text(
-                    "Estado: ",
-                  ),
-                  Text(
-                    "Reclamado",
-                  ),
+                  const Text("Estado: ", style: descriptionSubtitle),
+                  Text("Reclamado", style: descriptionHistorial),
                 ],
               ),
               Row(
                 children: [
-                  Text(
-                    "Fecha del reclamo: ",
-                  ),
-                  Text(
-                    "15/02/2023",
-                  ),
+                  const Text("Fecha del reclamo: ", style: descriptionSubtitle),
+                  Text("15/02/2023", style: descriptionHistorial),
                 ],
               )
             ],

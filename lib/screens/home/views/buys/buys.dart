@@ -1,6 +1,6 @@
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
-import 'package:coin_flutter/screens/home/views/bodyButtons/buys/widgets/BuysContainer.dart';
-import 'package:coin_flutter/screens/home/views/bodyButtons/buys/widgets/BuysContainerInactive.dart';
+import 'package:coin_flutter/screens/home/views/buys/widgets/BuysContainer.dart';
+import 'package:coin_flutter/screens/home/views/buys/widgets/BuysContainerInactive.dart';
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +31,7 @@ class Buys extends StatelessWidget {
             replacement: Center(
                 child: Column(
               children: const [
-                Text('Tus compras'),
+                Text('Compras'),
                 SizedBox(
                   height: 50,
                 ),

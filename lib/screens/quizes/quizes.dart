@@ -1,4 +1,8 @@
+import 'package:coin_flutter/screens/home/views/widgets/profileBar.dart';
+import 'package:coin_flutter/screens/quizes/widgets/containerQuiz.dart';
+import 'package:coin_flutter/screens/quizes/widgets/containerQuizBlock.dart';
 import 'package:coin_flutter/screens/quizes/widgets/quizBody.dart';
+import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 
 class Quizes extends StatelessWidget {
@@ -7,62 +11,32 @@ class Quizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const SizedBox(height: 60),
-          const Text("Quizes"),
-          Column(
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            QuizWidget(preguntas: _preguntas)),
-                  );
-                },
-                child: const Text(
-                  "Primer quiz",
-                ),
-              )
-            ],
-          )
-        ],
+      backgroundColor: const Color(0xffE8F0F8),
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              color: Colors.white,
+              child: Column(
+                children: const [
+                  UISizedBox.gapH10,
+                  ProfileBar(),
+                  UISizedBox.gapH30,
+                ],
+              ),
+            ),
+            const Text(
+              'Quizes',
+              style: titleBlack,
+            ),
+            //HERE
+
+            ContainerQuiz(),
+            ContainerQuizBlock()
+          ],
+        ),
       ),
     );
   }
 }
-
-final List<Map<String, dynamic>> _preguntas = [
-  {
-    'pregunta': '¿Cuál es la capital de Francia?',
-    'respuestas': ['París', 'Londres', 'Madrid', 'Berlín'],
-  },
-  {
-    'pregunta': '¿Quién escribió "Don Quijote de la Mancha"?',
-    'respuestas': [
-      'Miguel de Cervantes',
-      'Federico García Lorca',
-      'Pablo Neruda',
-      'Jorge Luis Borges'
-    ],
-  },
-  {
-    'pregunta': '¿Cuál es el océano más grande del mundo?',
-    'respuestas': [
-      'El Océano Pacífico',
-      'El Océano Atlántico',
-      'El Océano Índico',
-      'El Océano Glacial Ártico'
-    ],
-  },
-  {
-    'pregunta': '¿En qué año comenzó la Segunda Guerra Mundial?',
-    'respuestas': ['1939', '1914', '1945', '1936'],
-  },
-  {
-    'pregunta': '¿Quién es el autor de la obra "La Odisea"?',
-    'respuestas': ['Homero', 'Virgilio', 'Ovidio', 'Cervantes'],
-  },
-];

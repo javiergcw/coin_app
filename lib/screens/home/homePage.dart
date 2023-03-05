@@ -1,7 +1,7 @@
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
-import 'package:coin_flutter/screens/home/views/bodyButtons/buys/buys.dart';
-import 'package:coin_flutter/screens/home/views/bodyButtons/rules.dart';
-import 'package:coin_flutter/screens/home/views/bodyButtons/shop/shop.dart';
+import 'package:coin_flutter/screens/home/views/buys/buys.dart';
+import 'package:coin_flutter/screens/home/views/rules/rules.dart';
+import 'package:coin_flutter/screens/home/views/shop/shop.dart';
 import 'package:coin_flutter/screens/home/views/widgets/line.dart';
 import 'package:coin_flutter/screens/home/views/widgets/popUp.dart';
 import 'package:coin_flutter/screens/home/views/widgets/profileBar.dart';

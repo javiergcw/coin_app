@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
 import 'package:coin_flutter/screens/home/homePage.dart';
-import 'package:coin_flutter/screens/home/views/bodyButtons/shop/finish.dart';
+import 'package:coin_flutter/screens/home/views/shop/finish.dart';
 import 'package:coin_flutter/screens/home/views/widgets/popUp.dart';
 import 'package:coin_flutter/services/firebase_service.dart';
 import 'package:coin_flutter/utils/res.dart';

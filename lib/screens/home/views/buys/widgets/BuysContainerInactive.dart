@@ -10,7 +10,7 @@ class BuyContainerInactive extends StatelessWidget {
       height: 80,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: UIColors.graySix,
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: Row(
@@ -19,15 +19,7 @@ class BuyContainerInactive extends StatelessWidget {
             height: 80,
             width: 80,
             decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: UIColors.green.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 8,
-                  offset: Offset(0, 0), // changes position of shadow
-                ),
-              ],
-              color: UIColors.green,
+              color: UIColors.grayFive,
               borderRadius: BorderRadius.circular(20.0),
             ),
           ),
@@ -35,29 +27,19 @@ class BuyContainerInactive extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              UISizedBox.gapH8,
-              const Text(
-                "Lapiz marca mongol",
-              ),
+              UISizedBox.gapH14,
+              const Text("Lapiz marca mongol", style: titleHistorialInactive),
               UISizedBox.gapH10,
               Row(
-                children: [
-                  Text(
-                    "Estado: ",
-                  ),
-                  Text(
-                    "Reclamado",
-                  ),
+                children: const [
+                  Text("Estado: ", style: descriptionInactive),
+                  Text("Reclamado", style: descriptionInactive),
                 ],
               ),
               Row(
-                children: [
-                  Text(
-                    "Fecha del reclamo: ",
-                  ),
-                  Text(
-                    "15/02/2023",
-                  ),
+                children: const [
+                  Text("Fecha del reclamo: ", style: descriptionInactive),
+                  Text("15/02/2023", style: descriptionInactive),
                 ],
               )
             ],
