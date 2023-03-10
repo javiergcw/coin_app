@@ -4,6 +4,7 @@ import 'package:coin_flutter/screens/home/views/buys/widgets/BuysContainerInacti
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class Buys extends StatelessWidget {
   const Buys({super.key});
@@ -45,8 +46,27 @@ class Buys extends StatelessWidget {
                   'Tus compras',
                   style: titleBlack,
                 ),
-                BuyContainerActive(),
-                BuyContainerInactive(),
+                Column(
+                  children: model.buysWithId
+                      .map((item) => item['status'] == "0"
+                          ? BuyContainerInactive(
+                              date: DateFormat('dd/MM/yyyy')
+                                  .format(item['date'].toDate())
+                                  .toString(),
+                              product: item['name'],
+                              status: 'Sin reclamar',
+                            )
+                          : BuyContainerActive(
+                              date: DateFormat('dd/MM/yyyy')
+                                  .format(item['date'].toDate())
+                                  .toString(),
+                              product: item['name'],
+                              status: 'Reclamado',
+                            ))
+                      .toList(),
+                ),
+                /*  BuyContainerActive(),
+                BuyContainerInactive(), */
                 /*   Column(
                   children: model.buysWithId
                       .map(

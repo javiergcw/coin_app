@@ -2,7 +2,14 @@ import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 
 class BuyContainerActive extends StatelessWidget {
-  const BuyContainerActive({super.key});
+  const BuyContainerActive(
+      {required this.product,
+      required this.date,
+      required this.status,
+      super.key});
+  final String product;
+  final String date;
+  final String status;
 
   @override
   Widget build(BuildContext context) {
@@ -36,21 +43,21 @@ class BuyContainerActive extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               UISizedBox.gapH14,
-              const Text(
-                "Lapiz marca mongol",
+              Text(
+                product,
                 style: titleHistorial,
               ),
               UISizedBox.gapH10,
               Row(
                 children: [
                   const Text("Estado: ", style: descriptionSubtitle),
-                  Text("Reclamado", style: descriptionHistorial),
+                  Text(status, style: descriptionHistorial),
                 ],
               ),
               Row(
                 children: [
                   const Text("Fecha del reclamo: ", style: descriptionSubtitle),
-                  Text("15/02/2023", style: descriptionHistorial),
+                  Text(date, style: descriptionHistorial),
                 ],
               )
             ],

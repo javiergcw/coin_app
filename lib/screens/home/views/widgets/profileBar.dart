@@ -5,6 +5,7 @@ import 'package:coin_flutter/screens/home/views/widgets/popUp.dart';
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProfileBar extends StatelessWidget {
   const ProfileBar({super.key});
@@ -23,8 +24,71 @@ class ProfileBar extends StatelessWidget {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Shimmer.fromColors(
+              baseColor: Colors.grey[300]!,
+              highlightColor: Colors.grey[100]!,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width / 2.5,
+                            color: Colors.white,
+                          ),
+                          UISizedBox.gapH20,
+                          Row(
+                            children: [
+                              Container(
+                                height: 31,
+                                width: MediaQuery.of(context).size.height / 8,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                              ),
+                              UISizedBox.gapW10,
+                              Container(
+                                height: 31,
+                                width: 31,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  border: Border.all(
+                                    width: 2.0,
+                                    style: BorderStyle.solid,
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Container(
+                        width: MediaQuery.of(context).size.width / 4.4,
+                        height: MediaQuery.of(context).size.width / 4.6,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 8,
+                              offset: const Offset(0, 0),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             );
           }
           return Column(

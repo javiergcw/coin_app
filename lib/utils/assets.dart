@@ -6,6 +6,10 @@ abstract class Assets {
   static const String logoMain = '$_images/logoBanner.png';
   static const String coin = '$_images/watermelon.png';
   static const String alert = '$_images/alert.png';
+  static const String reward1 = '$_images/memory.png';
+  static const String reward2 = '$_images/mouse.png';
+  static const String reward3 = '$_images/pencil.png';
+  static const String reward4 = '$_images/tablet.png';
 
   static const String avatar01 = '$_images/avatar_01.png';
 }

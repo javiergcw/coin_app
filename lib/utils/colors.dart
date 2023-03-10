@@ -6,6 +6,8 @@ abstract class UIColors {
   static const Color redQ = Color(0xffFF461D);
   static const Color redW = Color(0xfffFD825B);
   static const Color redMain = Color(0xffFF3D39);
+  static const Color redPink = Color(0xffFF360A);
+  static const Color pink = Color(0xffFF3364);
 
   static const Color gray = Color(0xffB3B3B3);
   static const Color graySecondary = Color(0xff9E9E9E);

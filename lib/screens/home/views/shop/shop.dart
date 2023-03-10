@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
-import 'package:coin_flutter/screens/home/homePage.dart';
 import 'package:coin_flutter/screens/home/views/shop/finish.dart';
-import 'package:coin_flutter/screens/home/views/widgets/popUp.dart';
+import 'package:coin_flutter/screens/home/views/shop/widgets/containerReward.dart';
+import 'package:coin_flutter/screens/home/views/shop/widgets/containerRewardsPrecargado.dart';
 import 'package:coin_flutter/services/firebase_service.dart';
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +25,19 @@ class Shop extends StatelessWidget {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Column(
+              children: [
+                Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: [
+                    buildShimmerContainer(context),
+                    buildShimmerContainer(context),
+                    buildShimmerContainer(context),
+                    buildShimmerContainer(context),
+                  ],
+                )
+              ],
             );
           }
           return Column(
@@ -37,52 +48,76 @@ class Shop extends StatelessWidget {
                 style: titleBlack,
               ),
               Wrap(
-                children: [],
-              )
-              /*   Column(
-                  children: model.rewards
-                      .map(
-                        (item) => SizedBox(
-                          width: double.infinity,
-                          height: 120,
-                          child: Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: 40,
-                                    height: 40,
-                                    child: Image.network(item['Image']),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(item['Name'].toString(),
-                                          style: const TextStyle(fontSize: 16)),
-                                      Text("Precio ${item['Value'].toString()}",
-                                          style: const TextStyle(fontSize: 16)),
-                                    ],
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      compareCoins(model.getUid!.toString(),
-                                          item['Id'], context);
-                                    },
-                                    child: const Text('Comprar'),
-                                  )
-                                ],
+                runSpacing: 10,
+                spacing: 10,
+                children: model.rewards
+                    .map(
+                      (item) => Column(
+                        children: [
+                          ContainerReward(
+                              colorPrimary: item['colorPrimary'],
+                              colorSecondary: item['colorSecondary'],
+                              image: "assets/images/${item['Image']}.png"),
+                          TextButton(
+                            onPressed: () {
+                              compareCoins(model.getUid!.toString(), item['Id'],
+                                  context);
+                            },
+                            child: const Text('Comprar'),
+                          )
+                        ],
+                      ),
+                    )
+                    .toList(),
+              ),
+            ],
+
+            /* const [
+                  ContainerReward(
+                    colorPrimary: UIColors.yellow,
+                    colorSecondary: UIColors.orange,
+                    image: Assets.reward1,
+                   */
+            /*  Column(
+                    children: model.rewards
+                        .map(
+                          (item) => SizedBox(
+                            width: double.infinity,
+                            height: 120,
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: 40,
+                                      height: 40,
+                                      child: Image.network(item['Image']),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(item['Name'].toString(),
+                                            style:
+                                                const TextStyle(fontSize: 16)),
+                                        Text(
+                                            "Precio ${item['Value'].toString()}",
+                                            style:
+                                                const TextStyle(fontSize: 16)),
+                                      ],
+                                    ),
+                                   
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      )
-                      .toList(),
-                ),
-               */
-            ],
+                        )
+                        .toList(),
+                  ),
+                 */
           );
         });
     /* 
@@ -260,6 +295,7 @@ Future<void> addShop(String uid, String name, String image) async {
     "date": DateTime.now(),
     "name": name,
     "image": image,
+    "status": "0",
   });
 }
 
