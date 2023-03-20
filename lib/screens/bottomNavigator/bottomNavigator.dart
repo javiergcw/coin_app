@@ -15,13 +15,10 @@ class CustomBottomNavigationBar extends StatefulWidget {
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
-    // Aquí se agregarían las diferentes vistas de la aplicación
-    // por ejemplo: HomePage(), ProfilePage(), etc.
     HomePage(),
-
     Quizes(),
     Profile(),
-    Coin()
+    Coin(),
   ];
 
   @override

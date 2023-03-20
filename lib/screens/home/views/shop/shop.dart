@@ -16,18 +16,20 @@ class Shop extends StatelessWidget {
     final model = Provider.of<ProviderState>(context, listen: false);
 
     return FutureBuilder<void>(
-        future: model.getRewards(),
-        builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-          if (snapshot.hasError) {
-            return const Center(
-              child: Text('Error al obtener datos de Firestore'),
-            );
-          }
+      future: model.getRewards(),
+      builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+        if (snapshot.hasError) {
+          return const Center(
+            child: Text('Error al obtener datos de Firestore'),
+          );
+        }
 
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Column(
-              children: [
-                Wrap(
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Wrap(
                   spacing: 10,
                   runSpacing: 10,
                   children: [
@@ -36,169 +38,49 @@ class Shop extends StatelessWidget {
                     buildShimmerContainer(context),
                     buildShimmerContainer(context),
                   ],
-                )
-              ],
-            );
-          }
-          return Column(
+                ),
+              )
+            ],
+          );
+        }
+        return Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
                 'Tienda',
                 style: titleBlack,
               ),
+              UISizedBox.gapH10,
               Wrap(
-                runSpacing: 10,
                 spacing: 10,
+                runSpacing: 10,
                 children: model.rewards
                     .map(
                       (item) => Column(
                         children: [
                           ContainerReward(
-                              colorPrimary: item['colorPrimary'],
-                              colorSecondary: item['colorSecondary'],
-                              image: "assets/images/${item['Image']}.png"),
-                          TextButton(
-                            onPressed: () {
+                            colorPrimary: item['colorPrimary'],
+                            colorSecondary: item['colorSecondary'],
+                            image: "assets/images/${item['Image']}.png",
+                            onTap: () {
                               compareCoins(model.getUid!.toString(), item['Id'],
                                   context);
                             },
-                            child: const Text('Comprar'),
-                          )
+                            name: item['Name'].toString(),
+                            value: item['Value'].toString(),
+                          ),
                         ],
                       ),
                     )
                     .toList(),
               ),
             ],
-
-            /* const [
-                  ContainerReward(
-                    colorPrimary: UIColors.yellow,
-                    colorSecondary: UIColors.orange,
-                    image: Assets.reward1,
-                   */
-            /*  Column(
-                    children: model.rewards
-                        .map(
-                          (item) => SizedBox(
-                            width: double.infinity,
-                            height: 120,
-                            child: Card(
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 40,
-                                      height: 40,
-                                      child: Image.network(item['Image']),
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(item['Name'].toString(),
-                                            style:
-                                                const TextStyle(fontSize: 16)),
-                                        Text(
-                                            "Precio ${item['Value'].toString()}",
-                                            style:
-                                                const TextStyle(fontSize: 16)),
-                                      ],
-                                    ),
-                                   
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                 */
-          );
-        });
-    /* 
-        ProviderState _providerState =
-        Provider.of<ProviderState>(context, listen: false);
-    Expanded(
-      child: FutureBuilder(
-        future: getRewards(),
-        builder: ((context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Tienda'),
-                ListView.builder(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
-                    itemCount: snapshot.data?.length,
-                    itemBuilder: ((context, index) => Wrap(
-                          children: [
-                            Container(
-                              width: double.infinity,
-                              height: 80,
-                              color: Colors.amberAccent,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 20),
-                                child: Wrap(
-                                  spacing: 20,
-                                  children: [
-                                    SizedBox(
-                                      width: 100,
-                                      height: 40,
-                                      child: Image.network(
-                                          snapshot.data?[index]['Image']),
-                                    ),
-                                    SizedBox(
-                                      width: 120,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                              "Nombre:${snapshot.data?[index]['Name']}"),
-                                          Text(
-                                              "Precio:${snapshot.data?[index]['Value']}"),
-                                        ],
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    TextButton(
-                                      onPressed: () {
-                                        compareCoins(
-                                            _providerState.getUid!.toString(),
-                                            snapshot.data?[index]['Id'],
-                                            context);
-                                      },
-                                      child: const Text('Comprar'),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                              width: 10,
-                            ),
-                          ],
-                        )))
-              ],
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        }),
-      ),
+          ),
+        );
+      },
     );
-   */
   }
 }
 

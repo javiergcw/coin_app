@@ -1,15 +1,18 @@
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 
-class BuyContainerActive extends StatelessWidget {
-  const BuyContainerActive(
+class BuyContainerInactive extends StatelessWidget {
+  const BuyContainerInactive(
       {required this.product,
       required this.date,
       required this.status,
+      required this.image,
       super.key});
+
   final String product;
   final String date;
   final String status;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class BuyContainerActive extends StatelessWidget {
       height: 80,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: UIColors.graySix,
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: Row(
@@ -26,16 +29,15 @@ class BuyContainerActive extends StatelessWidget {
             height: 80,
             width: 80,
             decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: UIColors.green.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 8,
-                  offset: const Offset(0, 0), // changes position of shadow
-                ),
-              ],
-              color: UIColors.green,
+              color: UIColors.grayFive,
               borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Opacity(
+                opacity: 0.5,
+                child: Image.asset(image),
+              ),
             ),
           ),
           UISizedBox.gapW14,
@@ -43,21 +45,18 @@ class BuyContainerActive extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               UISizedBox.gapH14,
-              Text(
-                product,
-                style: titleHistorial,
-              ),
+              Text(product, style: titleHistorialInactive),
               UISizedBox.gapH10,
               Row(
                 children: [
-                  const Text("Estado: ", style: descriptionSubtitle),
-                  Text(status, style: descriptionHistorial),
+                  const Text("Estado: ", style: descriptionInactive),
+                  Text(status, style: descriptionInactive),
                 ],
               ),
               Row(
                 children: [
-                  const Text("Fecha del reclamo: ", style: descriptionSubtitle),
-                  Text(date, style: descriptionHistorial),
+                  const Text("Fecha del reclamo: ", style: descriptionInactive),
+                  Text(date, style: descriptionInactive),
                 ],
               )
             ],

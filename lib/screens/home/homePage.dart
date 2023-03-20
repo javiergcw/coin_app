@@ -1,5 +1,5 @@
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
-import 'package:coin_flutter/screens/home/views/buys/buys.dart';
+import 'package:coin_flutter/screens/home/views/historial/historial.dart';
 import 'package:coin_flutter/screens/home/views/rules/rules.dart';
 import 'package:coin_flutter/screens/home/views/shop/shop.dart';
 import 'package:coin_flutter/screens/home/views/widgets/line.dart';

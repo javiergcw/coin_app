@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-Widget buildShimmerContainer(BuildContext context) {
+Widget buildShimmerContainerHistorial(BuildContext context) {
   return Shimmer(
     gradient: LinearGradient(
       begin: Alignment.centerLeft,
@@ -15,8 +15,8 @@ Widget buildShimmerContainer(BuildContext context) {
     ),
     period: Duration(milliseconds: 500),
     child: Container(
-      width: MediaQuery.of(context).size.width / 2.2,
-      height: MediaQuery.of(context).size.height / 3.9,
+      width: double.infinity,
+      height: 80,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
         color: Colors.white,

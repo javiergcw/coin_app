@@ -1,5 +1,7 @@
+import 'package:coin_flutter/screens/profile/widgets/Account.dart';
+import 'package:coin_flutter/screens/profile/widgets/GeneralInfo.dart';
+import 'package:coin_flutter/screens/profile/widgets/LogOut.dart';
 import 'package:coin_flutter/screens/profile/widgets/avatar.dart';
-import 'package:coin_flutter/screens/profile/widgets/name.dart';
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 
@@ -18,8 +20,18 @@ class _ProfileState extends State<Profile> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            Avatar(),
-            Name(),
+            const Avatar(),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: const [
+                  Accounts(),
+                  UISizedBox.gapH20,
+                  GeneralInfo(),
+                  LogOut()
+                ],
+              ),
+            )
           ],
         ),
       ),

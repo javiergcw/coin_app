@@ -1,4 +1,7 @@
+import 'package:coin_flutter/screens/quizes/quizes.dart';
 import 'package:flutter/material.dart';
+
+import '../../bottomNavigator/bottomNavigator.dart';
 
 class QuizWidget extends StatefulWidget {
   final List<Map<String, dynamic>> preguntas;
@@ -25,12 +28,6 @@ class _QuizWidgetState extends State<QuizWidget> {
   void _anteriorPregunta() {
     setState(() {
       _preguntaActual--;
-    });
-  }
-
-  void _siguientePregunta() {
-    setState(() {
-      _preguntaActual++;
     });
   }
 
@@ -80,33 +77,7 @@ class _QuizWidgetState extends State<QuizWidget> {
                           ),
                         ))
                     .toList(),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (_preguntaActual > 0)
-                      ElevatedButton(
-                        onPressed: _anteriorPregunta,
-                        child: Text('Anterior'),
-                      ),
-                    SizedBox(width: 20),
-                    if (_preguntaActual < widget.preguntas.length - 1)
-                      ElevatedButton(
-                        onPressed: () {
-                          if (_preguntaActual == widget.preguntas.length - 2) {
-                            _siguientePregunta();
-                            _siguientePregunta();
-                          } else {
-                            _siguientePregunta();
-                          }
-                        },
-                        child: Text(
-                            _preguntaActual == widget.preguntas.length - 2
-                                ? 'Finalizar'
-                                : 'Siguiente'),
-                      ),
-                  ],
-                ),
+                const SizedBox(height: 20),
               ],
             )
           : Center(
@@ -124,8 +95,14 @@ class _QuizWidgetState extends State<QuizWidget> {
                   ),
                   const SizedBox(height: 16.0),
                   ElevatedButton(
-                    onPressed: _reiniciarQuiz,
-                    child: Text('Volver a jugar'),
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  CustomBottomNavigationBar()));
+                    },
+                    child: const Text('Volver a jugar'),
                   ),
                 ],
               ),

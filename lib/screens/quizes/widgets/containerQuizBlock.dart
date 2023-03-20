@@ -70,7 +70,10 @@ class _ContainerQuizBlockState extends State<ContainerQuizBlock> {
         Container(
           height: 100,
           width: double.infinity,
-          color: Colors.black.withOpacity(0.5),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
       ],
     );

@@ -1,4 +1,4 @@
-import 'package:coin_flutter/screens/home/homePage.dart';
+import 'package:coin_flutter/screens/bottomNavigator/bottomNavigator.dart';
 import 'package:flutter/material.dart';
 
 class FinishShop extends StatelessWidget {
@@ -16,7 +16,8 @@ class FinishShop extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
+                    MaterialPageRoute(
+                        builder: (context) => CustomBottomNavigationBar()),
                   );
                 },
                 child: const Text("Continuar"))

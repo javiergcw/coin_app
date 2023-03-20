@@ -4,7 +4,16 @@ const white12 = TextStyle(
   fontSize: 12,
   color: Colors.white,
 );
+const white15 = TextStyle(
+  fontSize: 15,
+  color: Colors.white,
+);
 
+const subtitleBlack = TextStyle(
+  fontSize: 15,
+  color: UIColors.black,
+  fontWeight: FontWeight.bold,
+);
 const titleBlack = TextStyle(
   fontSize: 20,
   color: UIColors.black,
@@ -31,10 +40,28 @@ const descriptionSubtitle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const descriptionSubtitle12 = TextStyle(
+  fontSize: 12,
+  color: UIColors.graySecondary,
+  fontWeight: FontWeight.w800,
+);
+
+const descriptionSubtitle14 = TextStyle(
+  fontSize: 12,
+  color: UIColors.graySecondary,
+  fontWeight: FontWeight.w600,
+);
+
 //////////////////////////////////
 
 const titleHistorialInactive = TextStyle(
   fontSize: 15,
+  color: UIColors.grayThirdy,
+  fontWeight: FontWeight.bold,
+);
+
+const titleProfile = TextStyle(
+  fontSize: 12,
   color: UIColors.grayThirdy,
   fontWeight: FontWeight.bold,
 );
@@ -92,4 +119,11 @@ const actionBlock = TextStyle(
   fontSize: 14,
   fontWeight: FontWeight.w600,
   color: Colors.black,
+);
+
+/////////
+
+const reqQ14 = TextStyle(
+  fontSize: 14,
+  color: UIColors.redW,
 );
