@@ -23,7 +23,7 @@ class SectionProfile extends StatelessWidget {
               width: 40,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
-                color: Colors.grey[300],
+                color: Colors.white,
               ),
               child: Icon(
                 icon,
