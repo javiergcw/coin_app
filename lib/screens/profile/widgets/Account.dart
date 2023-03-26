@@ -1,4 +1,3 @@
-import 'package:coin_flutter/screens/home/views/widgets/line.dart';
 import 'package:coin_flutter/screens/profile/widgets/SectionProfile.dart';
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';

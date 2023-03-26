@@ -1,5 +1,5 @@
 import 'package:coin_flutter/screens/coins/coin.dart';
-import 'package:coin_flutter/screens/home/homePage.dart';
+import 'package:coin_flutter/screens/home/screens/homePage.dart';
 import 'package:coin_flutter/screens/profile/profile.dart';
 import 'package:coin_flutter/screens/quizes/quizes.dart';
 import 'package:flutter/material.dart';

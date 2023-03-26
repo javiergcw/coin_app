@@ -127,3 +127,8 @@ const reqQ14 = TextStyle(
   fontSize: 14,
   color: UIColors.redW,
 );
+
+/////////
+const red = TextStyle(
+  color: UIColors.redMain,
+);
