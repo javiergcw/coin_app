@@ -12,19 +12,12 @@ class Rules extends StatelessWidget {
     final model = Provider.of<ProviderState>(context, listen: false);
 
     return FutureBuilder<void>(
-      future: model.getRewards(),
       builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-        if (snapshot.hasError) {
-          return const Center(
-            child: Text('Error al obtener datos de Firestore'),
-          );
-        }
-
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Wrap(
-              runSpacing: 10,
+              runSpacing: 15,
               children: [
                 buildShimmerContainerRules(context),
                 buildShimmerContainerRules(context),
@@ -45,23 +38,25 @@ class Rules extends StatelessWidget {
               ),
               UISizedBox.gapH20,
               Wrap(
-                runSpacing: 10,
+                runSpacing: 15,
                 children: const [
                   RulesContainer(
-                    icon: Icons.shopping_bag_sharp,
-                    title: 'Tienda',
-                    subtitle: 'Este es un texto de ejemplo grande de tienda',
-                  ),
-                  RulesContainer(
-                    icon: Icons.cookie_rounded,
-                    title: 'Moneda',
-                    subtitle: 'Este es un texto de ejemplo grande de Moneda',
-                  ),
-                  RulesContainer(
-                    icon: Icons.home_repair_service_rounded,
-                    title: 'Profesores',
+                    icon: Icons.wb_incandescent_sharp,
+                    title: '¡Gana puntos mientras aprendes!',
                     subtitle:
-                        'Este es un texto de ejemplo grande de profesores',
+                        'Te motiva a participar en actividades y quizes relacionadas a tu clase',
+                  ),
+                  RulesContainer(
+                    icon: Icons.sentiment_very_satisfied_sharp,
+                    title: '¡Aprender es más divertido!',
+                    subtitle:
+                        'Tus profesores te darán puntos cada vez que completes actividades y quizes en clase.',
+                  ),
+                  RulesContainer(
+                    icon: Icons.monetization_on,
+                    title: 'Canjea tus puntos y gana',
+                    subtitle:
+                        'acumula puntos por tus actividades y quizes, y canjéalos por productos exclusivos en nuestra tienda virtual.',
                   ),
                 ],
               ),

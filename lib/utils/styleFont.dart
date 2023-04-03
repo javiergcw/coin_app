@@ -14,6 +14,11 @@ const subtitleBlack = TextStyle(
   color: UIColors.black,
   fontWeight: FontWeight.bold,
 );
+
+const bodyBlack = TextStyle(
+  fontSize: 14,
+  color: UIColors.black,
+);
 const titleBlack = TextStyle(
   fontSize: 20,
   color: UIColors.black,

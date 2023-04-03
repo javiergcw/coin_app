@@ -50,6 +50,14 @@ class _LoginState extends State<Login> {
               child: Wrap(
                 runSpacing: 25,
                 children: [
+                  const Center(
+                    child: Image(
+                      height: 200,
+                      image: AssetImage(
+                        Assets.loginIsometric,
+                      ),
+                    ),
+                  ),
                   CustomTextField(
                     controller: email,
                     hintText: 'Correo electronico',
@@ -105,8 +113,50 @@ void _Login(String email, String password, BuildContext context) async {
   try {
     if (await _providerState.LoginUser(email, password)) {
       await _providerState.getCoinId();
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => CustomBottomNavigationBar()));
+    } else {
+      // ignore: use_build_context_synchronously
+      return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            title: const Center(
+              child: Text(
+                'Contraseña incorrecta',
+                style: TextStyle(fontSize: 18.0),
+              ),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const SizedBox(height: 10.0),
+                const Center(
+                  child: Text(
+                    'Inténtalo nuevamente',
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                ),
+                const SizedBox(height: 10.0),
+                const Divider(),
+                TextButton(
+                  child: const Text(
+                    'Aceptar',
+                    style: TextStyle(fontSize: 18.0),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+        },
+      );
     }
   } catch (e) {
     print(e);

@@ -1,4 +1,4 @@
-import 'package:coin_flutter/screens/information_general/feedback.dart';
+import 'package:coin_flutter/screens/profile/views/information_general/Feedback.dart';
 import 'package:coin_flutter/screens/profile/widgets/SectionProfile.dart';
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class GeneralInfo extends StatelessWidget {
         GestureDetector(
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => FeedbackForm()));
+                MaterialPageRoute(builder: (context) => const FeedbackForm()));
           },
           child: const SectionProfile(
             icon: Icons.format_align_center,

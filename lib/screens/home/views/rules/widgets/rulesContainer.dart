@@ -43,8 +43,14 @@ class RulesContainer extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title),
-            Container(
+            SizedBox(
+                width: MediaQuery.of(context).size.width - 150,
+                child: Text(
+                  title,
+                  style: TitleContainerQuiz,
+                )),
+            UISizedBox.gapH4,
+            SizedBox(
               width: MediaQuery.of(context).size.width - 150,
               child: Text(
                 subtitle,

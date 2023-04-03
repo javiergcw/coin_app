@@ -1,6 +1,10 @@
+import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
+import 'package:coin_flutter/screens/profile/views/settings_accounts/Progress.dart';
 import 'package:coin_flutter/screens/profile/widgets/SectionProfile.dart';
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class Accounts extends StatelessWidget {
   const Accounts({super.key});
@@ -17,9 +21,10 @@ class Accounts extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            _showSheet(context);
+            _showQR(context);
+            /*     _showSheet(context); */
           },
-          child: SectionProfile(
+          child: const SectionProfile(
             icon: Icons.qr_code_rounded,
             subtitle: 'Ingresa tu Qr',
             title: 'Tu QR',
@@ -33,42 +38,62 @@ class Accounts extends StatelessWidget {
             borderRadius: BorderRadius.circular(20.0),
           ),
         ),
-        SectionProfile(
-          icon: Icons.line_axis_sharp,
-          subtitle: 'Observa tus avances',
-          title: 'Graficas',
+        GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ProgressBar()));
+          },
+          child: const SectionProfile(
+            icon: Icons.line_axis_sharp,
+            subtitle: 'Observa tus avances',
+            title: 'Graficas',
+          ),
         ),
       ],
     );
   }
 }
 
-void _showSheet(context) {
+void _showQR(context) {
+  final model = Provider.of<ProviderState>(context, listen: false);
+
+  String qrData = "https://www.google.com";
   showModalBottomSheet(
     context: context,
     isScrollControlled: true, // set this to true
-    builder: (_) {
-      return DraggableScrollableSheet(
-        maxChildSize: 0.75,
-        expand: false,
-        builder: (_, controller) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-            child: SingleChildScrollView(
-              controller: controller,
-              child: Column(
-                children: [
-                  /*              Image(image: image)
-                      
-                       */
 
-                  Text(
-                    'Coin Wrap es una aplicación diseñada exclusivamente para fines educativos y está disponible solo para estudiantes y profesores que se encuentren actualmente inscritos en una institución educativa. Los estudiantes solo pueden recibir monedas si son asignadas por su profesor a través de la aplicación, por lo que Coin Wrap no tiene la responsabilidad de verificar si los puntos son asignados de manera justa o no. Los estudiantes deben utilizar la aplicación de manera responsable y ética, evitando acosar o intimidar a otros estudiantes o profesores. Si se descubre que la aplicación está siendo utilizada de manera inapropiada, el equipo de Coin Wrap se reserva el derecho de retirar la aplicación de cualquier estudiante o institución educativa. Asimismo, Coin Wrap no se hace responsable por la pérdida de puntos o cualquier problema técnico que impida a los estudiantes utilizar la aplicación de manera adecuada. Los premios canjeados por los estudiantes serán entregados según la disponibilidad de los mismos, y se registrarán en su historial de premios en la aplicación, permitiendo a los estudiantes verificar si el premio ha sido entregado o no. Por último, el equipo de Coin Wrap se reserva el derecho de modificar estas políticas y condiciones en cualquier momento sin previo aviso, por lo que es responsabilidad del usuario revisar periódicamente estas políticas y condiciones para estar al tanto de cualquier cambio.',
-                    textAlign: TextAlign.justify,
-                  )
+    builder: (_) {
+      return FutureBuilder(
+        future: model.getterUid(),
+        builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+          return DraggableScrollableSheet(
+            maxChildSize: 0.55,
+            expand: false,
+            builder: (_, controller) {
+              return Column(
+                children: [
+                  Container(
+                    width: 40,
+                    height: 4,
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  const Text(
+                    'Tu QR',
+                    style: TitleContainerQuiz,
+                  ),
+                  UISizedBox.gapH10,
+                  QrImage(
+                    data: model.getUid!.toString(),
+                    version: QrVersions.auto,
+                    size: MediaQuery.of(context).size.height / 3,
+                  ),
                 ],
-              ),
-            ),
+              );
+            },
           );
         },
       );

@@ -328,6 +328,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.5"
+  qr:
+    dependency: transitive
+    description:
+      name: qr
+      sha256: "5c4208b4dc0d55c3184d10d83ee0ded6212dc2b5e2ba17c5a0c0aab279128d21"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   qr_code_scanner:
     dependency: "direct main"
     description:
@@ -336,6 +344,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  qr_flutter:
+    dependency: "direct main"
+    description:
+      name: qr_flutter
+      sha256: c5c121c54cb6dd837b9b9d57eb7bc7ec6df4aee741032060c8833a678c80b87e
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -437,6 +453,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  syncfusion_flutter_charts:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_charts
+      sha256: "629e5db5dd144f52f46e4bd850c2e1d07408f3fd57dc10c5bcb6990df45d4a58"
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.1.37"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: f23067e46b781d488abf8e22e5608ca9972b49562e95f9e46cb6134e968f721b
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.1.37"
   term_glyph:
     dependency: transitive
     description:

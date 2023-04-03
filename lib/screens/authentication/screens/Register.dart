@@ -2,6 +2,7 @@ import 'package:coin_flutter/screens/authentication/screens/Login.dart';
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
 import 'package:coin_flutter/screens/authentication/widgets/customButton.dart';
 import 'package:coin_flutter/screens/authentication/widgets/customTextField.dart';
+import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,7 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffF1F4FF),
       body: SafeArea(
         child: Stack(
           children: [
@@ -40,8 +42,20 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
               padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
               child: SingleChildScrollView(
                 child: Wrap(
-                  runSpacing: 20,
+                  spacing: 40,
                   children: [
+                    Center(
+                      child: Transform(
+                        alignment: Alignment.center,
+                        transform: Matrix4.identity()..scale(-1.0, 1.0, 1.0),
+                        child: const Image(
+                          image: AssetImage(
+                            Assets.passwordIsometric,
+                          ),
+                          height: 200.0,
+                        ),
+                      ),
+                    ),
                     CustomTextField(
                       icon: Icons.person,
                       controller: firstn,

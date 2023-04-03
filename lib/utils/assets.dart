@@ -11,5 +11,8 @@ abstract class Assets {
   static const String reward3 = '$_images/pencil.png';
   static const String reward4 = '$_images/tablet.png';
 
+  static const String passwordIsometric = '$_images/isometric_login.png';
+  static const String loginIsometric = '$_images/isometric_ps.png';
+
   static const String avatar01 = '$_images/avatar_01.png';
 }

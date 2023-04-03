@@ -151,7 +151,13 @@ class ProviderState extends ChangeNotifier {
     this.buysWithId = buysWithId;
     return buysWithId;
   }
+
+  Future<String> getterUid() async {
+    return _uid!.toString();
+  }
 }
+
+
  /* List buys = [];
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
     final CollectionReference _collectionRef =
