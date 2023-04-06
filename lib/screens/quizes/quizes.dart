@@ -1,97 +1,111 @@
+import 'dart:math';
 import 'package:coin_flutter/screens/home/views/widgets/profileBar.dart';
-
 import 'package:coin_flutter/screens/quizes/widgets/containerQuiz.dart';
 import 'package:coin_flutter/screens/quizes/widgets/containerQuizBlock.dart';
 import 'package:coin_flutter/screens/quizes/widgets/quizBody.dart';
-
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 
-class Quizes extends StatelessWidget {
-  const Quizes({super.key});
+class _QuizWidgetState extends State<QuizWidget> {
+  int preguntaActual = 0;
+  int respuestaSeleccionada = -1;
+  int respuestaCorrecta() {
+    return widget.preguntas[preguntaActual]['respuesta'] as int;
+  }
+
+  void verificarRespuesta(int respuesta) {
+    setState(() {
+      respuestaSeleccionada = respuesta;
+    });
+    Future<void>.delayed(const Duration(seconds: 1), () {
+      setState(() {
+        if (respuestaSeleccionada == -1 && respuesta == respuestaCorrecta()) {
+          respuestaSeleccionada = -1;
+          preguntaActual++;
+
+          if (preguntaActual >= widget.preguntas.length) {
+            Navigator.of(context).pop();
+          }
+        } else {
+          respuestaSeleccionada = -1;
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final List<String> respuestas =
+        List<String>.from(widget.preguntas[preguntaActual]['respuestas'])
+          ..add(widget.preguntas[preguntaActual]['respuesta'].toString());
+
+    respuestas.shuffle();
+
     return Scaffold(
-      backgroundColor: const Color(0xffE8F0F8),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: const [
-                    ProfileBar(),
-                    UISizedBox.gapH30,
-                  ],
-                ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  const Text(
+                    'Quiz',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Wrap(
-                runSpacing: 10,
-                crossAxisAlignment: WrapCrossAlignment.start,
+              child: Text(
+                widget.preguntas[preguntaActual]['pregunta'] as String,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            UISizedBox.gapH10,
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Quizes',
-                    style: titleBlack,
-                  ),
-                  //HERE
-
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  QuizWidget(preguntas: _preguntas)));
-                    },
-                    child: const ContainerQuiz(),
-                  ),
-                  const ContainerQuizBlock()
+                  for (int i = 0; i < respuestas.length; i++)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          if (respuestaSeleccionada == -1) {
+                            verificarRespuesta(i);
+                          }
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: respuestaSeleccionada == i
+                                ? respuestas[i] ==
+                                        respuestaCorrecta().toString()
+                                    ? Colors.green
+                                    : Colors.red
+                                : Colors.grey[200],
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          padding: const EdgeInsets.all(20),
+                          child: Text(
+                            respuestas[i],
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      ),
+                    ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-final List<Map<String, dynamic>> _preguntas = [
-  {
-    'pregunta': '¿Cuál es la capital de Francia?',
-    'respuestas': ['París', 'Londres', 'Madrid', 'Berlín'],
-  },
-  {
-    'pregunta': '¿Quién escribió "Don Quijote de la Mancha"?',
-    'respuestas': [
-      'Miguel de Cervantes',
-      'Federico García Lorca',
-      'Pablo Neruda',
-      'Jorge Luis Borges'
-    ],
-  },
-  {
-    'pregunta': '¿Cuál es el océano más grande del mundo?',
-    'respuestas': [
-      'El Océano Pacífico',
-      'El Océano Atlántico',
-      'El Océano Índico',
-      'El Océano Glacial Ártico'
-    ],
-  },
-  {
-    'pregunta': '¿En qué año comenzó la Segunda Guerra Mundial?',
-    'respuestas': ['1939', '1914', '1945', '1936'],
-  },
-  {
-    'pregunta': '¿Quién es el autor de la obra "La Odisea"?',
-    'respuestas': ['Homero', 'Virgilio', 'Ovidio', 'Cervantes'],
-  },
-];

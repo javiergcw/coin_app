@@ -1,7 +1,11 @@
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
+import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'dart:async';
+
+import 'package:shimmer/shimmer.dart';
 
 class QRScanner extends StatefulWidget {
   const QRScanner({super.key});
@@ -46,12 +50,184 @@ class _QRScannerState extends State<QRScanner> {
   Widget build(BuildContext context) {
     ProviderState provider = ProviderState();
 
+    final model = Provider.of<ProviderState>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Agregar puntos'),
       ),
       body: Column(
         children: <Widget>[
+          FutureBuilder<void>(
+              future: model.getInfoUser(),
+              builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text('Error al obtener datos de Firestore'),
+                  );
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Shimmer.fromColors(
+                    baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.grey[100]!,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height: 50,
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.5,
+                                  color: Colors.white,
+                                ),
+                                UISizedBox.gapH20,
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 31,
+                                      width:
+                                          MediaQuery.of(context).size.height /
+                                              8,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                    ),
+                                    UISizedBox.gapW10,
+                                    Container(
+                                      height: 31,
+                                      width: 31,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(50.0),
+                                        border: Border.all(
+                                          width: 2.0,
+                                          style: BorderStyle.solid,
+                                          color: Colors.transparent,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            Container(
+                              width: MediaQuery.of(context).size.width / 4.4,
+                              height: MediaQuery.of(context).size.width / 4.6,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 0),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                }
+
+                return Column(
+                  children: model.infoUserWithId
+                      .map(
+                        (item) => Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text('Tus puntos:', style: titleBlack),
+                                    Container(
+                                        height: 31,
+                                        width:
+                                            MediaQuery.of(context).size.height /
+                                                8,
+                                        decoration: BoxDecoration(
+                                          gradient: const LinearGradient(
+                                            begin: Alignment.centerLeft,
+                                            end: Alignment.centerRight,
+                                            colors: [
+                                              UIColors.yellow,
+                                              UIColors.orange,
+                                            ],
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 5),
+                                              child: Container(
+                                                height: 25,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ),
+                                                child: Image.asset(Assets.coin),
+                                              ),
+                                            ),
+                                            const Spacer(),
+                                            Text(
+                                              '${item['value']}',
+                                              style: white12,
+                                            ),
+                                            UISizedBox.gapW20,
+                                          ],
+                                        )),
+                                    UISizedBox.gapW10,
+                                    GestureDetector(
+                                      child: Container(
+                                          height: 31,
+                                          width: 31,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(50.0),
+                                            border: Border.all(
+                                              width: 2.0,
+                                              style: BorderStyle.solid,
+                                              color: Colors.transparent,
+                                            ),
+                                            gradient: const LinearGradient(
+                                              colors: [
+                                                UIColors.redQ,
+                                                UIColors.redW,
+                                              ],
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight,
+                                              tileMode: TileMode.clamp,
+                                            ),
+                                          ),
+                                          child: Image.asset(Assets.alert)),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                      .toList(),
+                );
+              }),
           TextField(
             controller: _textEditingController,
             enabled: !isRead,
@@ -110,8 +286,12 @@ class _QRScannerState extends State<QRScanner> {
                   if (confirm) {
                     debugPrint('Acepto');
                     String sender = await provider.getUserId();
-                    provider.transferPoints(_textEditingController.text,
-                        int.tryParse(_amount.text) ?? 0, sender);
+                    // ignore: use_build_context_synchronously
+                    provider.transferPoints(
+                        context,
+                        _textEditingController.text,
+                        int.tryParse(_amount.text) ?? 0,
+                        sender);
                   }
                 } catch (e) {
                   // Manejo de excepciones

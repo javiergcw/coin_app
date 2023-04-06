@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coin_flutter/services/firebase_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class ProviderState extends ChangeNotifier {
   String? _uid;
@@ -178,23 +179,18 @@ class ProviderState extends ChangeNotifier {
     }
   }
 
-  Future<void> transferPoints(
-      String receiverId, int points, String uidSender) async {
+  Future<void> transferPoints(BuildContext context, String receiverId,
+      int points, String uidSender) async {
     try {
       final FirebaseFirestore _firestore = FirebaseFirestore.instance;
       final CollectionReference _collectionRef =
-          _firestore.collection("points");
+          _firestore.collection('points');
+      final coleccionRef = FirebaseFirestore.instance.collection('points');
 
       // Obtener la información del remitente
-
-      debugPrint("UID del que envia $uidSender");
-
       DocumentSnapshot senderDoc = await _collectionRef.doc(uidSender).get();
-
       dynamic senderData = senderDoc.data();
       int senderPoints;
-      debugPrint('Receiver data: $senderData');
-
       if (senderData is Map<String, dynamic>) {
         senderPoints = senderData['value'] as int;
       } else {
@@ -203,165 +199,52 @@ class ProviderState extends ChangeNotifier {
 
       // Verificar si el remitente tiene suficientes puntos para enviar
       if (senderPoints <= points) {
-        throw Exception('No tienes suficientes puntos para enviar');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('No tienes suficientes puntos'),
+          ),
+        );
+        return;
       }
 
       // Obtener la información del destinatario
-
-      debugPrint("UID del que recibe $receiverId");
-
-      debugPrint("UID del que recibe $receiverId");
       QuerySnapshot receiver =
-          await _collectionRef.where("id", isEqualTo: receiverId).get();
-      int receiverPoints;
+          await _collectionRef.where('id', isEqualTo: receiverId).get();
+      int receiverPoints = 0;
       if (receiver.docs.isNotEmpty) {
-        DocumentSnapshot receiverDoc =
-            receiver.docs.firstWhere((doc) => doc.id == receiverId);
-        receiverPoints = receiverDoc.get("value");
+        final receiverData = receiver.docs.first.data();
+        if (receiverData is Map<String, dynamic>) {
+          receiverPoints = receiverData['value'] as int;
+        } else {
+          throw Exception('No se encontraron documentos con id $receiverId');
+        }
       } else {
-        throw Exception('No se encontro esa cuenta');
+        throw Exception('No se encontraron documentos con id $receiverId');
       }
-
-      debugPrint("-");
 
       int newValue = receiverPoints + points;
 
-      final query = _collectionRef.where("id", isEqualTo: receiverId);
+      // Actualizar los puntos del receptor
+      final query = coleccionRef.where("id", isEqualTo: receiverId);
       final querySnapshot = await query.get();
-
       for (final doc in querySnapshot.docs) {
         await doc.reference.update({"value": newValue});
       }
+
+      // Actualizar los puntos del remitente
       WriteBatch batch = _firestore.batch();
       batch.update(senderDoc.reference, {"value": senderPoints - points});
-
       await batch.commit();
 
-      // Actualizar los puntos de ambas personas en una transacción
+      // Mostrar mensaje de transacción exitosa
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Enviado correctamente'),
+        ),
+      );
     } catch (e) {
       // Manejo de excepciones
       throw Exception('No se pudo transferir los puntos: $e');
     }
   }
 }
-
-
-
-
- /* List buys = [];
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    final CollectionReference _collectionRef =
-        _firestore.collection('shopping');
-
-    QuerySnapshot querySnapshot =
-        await _collectionRef.where('id', isEqualTo: _uid).get();
-
-    if (querySnapshot.docs.isNotEmpty) {
-      querySnapshot.docs.forEach((element) {
-        buys.add(element.data());
-      });
-
-      debugPrint("------------ 8 52");
-      debugPrint(buys.toString());
-      debugPrint("------------ 8 52");
-      return buys;
-    } else {
-      // puedes lanzar una excepción o devolver un valor por defecto
-      throw Exception('No se encontraron documentos con id 10');
-    } */
-
-
-/* Future<List> getBuysId() async {
-    List buys = [];
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    final CollectionReference _collectionRef =
-        _firestore.collection('shopping');
-
-    QuerySnapshot querySnapshot =
-        await _collectionRef.where('id', isEqualTo: _uid).get();
-
-    if (querySnapshot.docs.isNotEmpty) {
-      querySnapshot.docs.forEach((element) {
-        buys.add(element.data());
-      });
-
-      debugPrint("------------ 8 52");
-      debugPrint(buys.toString());
-      debugPrint("------------ 8 52");
-      return buys;
-    } else {
-      // puedes lanzar una excepción o devolver un valor por defecto
-      throw Exception('No se encontraron documentos con id 10');
-    }
-  }
- */
-
-
-    /*  List rewards = [];
-    CollectionReference collectionReferenceRewards = db.collection('rewards');
-
-    QuerySnapshot queryRewards = await collectionReferenceRewards.get();
-
-    queryRewards.docs.forEach((document) {
-      rewards.add(document.data());
-    });
-
-    return rewards; */
-
- 
-/*  List buys = [];
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    final CollectionReference _collectionRef =
-        _firestore.collection('shopping');
-
-    QuerySnapshot querySnapshot =
-        await _collectionRef.where('id', isEqualTo: _uid).get();
-
-    if (querySnapshot.docs.isNotEmpty) {
-      querySnapshot.docs.forEach((element) {
-        buys.add(element.data());
-      });
-
-      debugPrint("------------ 8 52");
-      debugPrint(buys.toString());
-      debugPrint("------------ 8 52");
-      return buys;
-    } else {
-      // puedes lanzar una excepción o devolver un valor por defecto
-      throw Exception('No se encontraron documentos con id 10');
-    } */
-
- /*  Future<bool> getPoints() async {
-    bool retval = false;
-
-    try {
-      List _DataPoints = [];
-
-      final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-      debugPrint("---------UID--------");
-      debugPrint(_uid);
-
-      final QuerySnapshot queryPoints = await _firestore
-          .collection('points')
-          .where('id', isEqualTo: _uid.toString())
-          .get();
-
-      queryPoints.docs.forEach((document) {
-        _DataPoints.add(document.data());
-      });
-      debugPrint("---------ARREGLO--------");
-      debugPrint(_DataPoints.toString());
-
-      List? DataPoints = _DataPoints;
-      int _points = DataPoints[0]['value'];
-      debugPrint("---------puntos--------");
-      debugPrint(_points.toString());
-
-      return retval = true;
-    } catch (e) {
-      print(e);
-    }
-    return retval;
-  }
- */

@@ -50,6 +50,14 @@ class Accounts extends StatelessWidget {
             title: 'Graficas',
           ),
         ),
+        Container(
+          width: MediaQuery.of(context).size.height,
+          height: 0.5,
+          decoration: BoxDecoration(
+            color: UIColors.gray,
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+        ),
         GestureDetector(
           onTap: () {
             Navigator.push(
