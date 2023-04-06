@@ -18,21 +18,23 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       backgroundColor: UIColors.background,
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            const Avatar(),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: const [
-                  Accounts(),
-                  UISizedBox.gapH20,
-                  GeneralInfo(),
-                  LogOut()
-                ],
-              ),
-            )
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              const Avatar(),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: const [
+                    Accounts(),
+                    UISizedBox.gapH20,
+                    GeneralInfo(),
+                    LogOut()
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

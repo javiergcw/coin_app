@@ -155,7 +155,97 @@ class ProviderState extends ChangeNotifier {
   Future<String> getterUid() async {
     return _uid!.toString();
   }
+
+  Future<String> getUserId() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      return user.uid;
+    } else {
+      throw Exception('No user logged in');
+    }
+  }
+
+  Future<String> GetNameStudentSendPoints(UIDstudent) async {
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    final CollectionReference _collectionRef = _firestore.collection('points');
+
+    QuerySnapshot querySnapshot =
+        await _collectionRef.where('id', isEqualTo: UIDstudent).get();
+    if (querySnapshot.docs.isNotEmpty) {
+      return querySnapshot.docs.first.get('name');
+    } else {
+      throw Exception('No se encontro esa cuenta');
+    }
+  }
+
+  Future<void> transferPoints(
+      String receiverId, int points, String uidSender) async {
+    try {
+      final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+      final CollectionReference _collectionRef =
+          _firestore.collection("points");
+
+      // Obtener la información del remitente
+
+      debugPrint("UID del que envia $uidSender");
+
+      DocumentSnapshot senderDoc = await _collectionRef.doc(uidSender).get();
+
+      dynamic senderData = senderDoc.data();
+      int senderPoints;
+      debugPrint('Receiver data: $senderData');
+
+      if (senderData is Map<String, dynamic>) {
+        senderPoints = senderData['value'] as int;
+      } else {
+        throw Exception('No se pudo obtener la información del remitente');
+      }
+
+      // Verificar si el remitente tiene suficientes puntos para enviar
+      if (senderPoints <= points) {
+        throw Exception('No tienes suficientes puntos para enviar');
+      }
+
+      // Obtener la información del destinatario
+
+      debugPrint("UID del que recibe $receiverId");
+
+      debugPrint("UID del que recibe $receiverId");
+      QuerySnapshot receiver =
+          await _collectionRef.where("id", isEqualTo: receiverId).get();
+      int receiverPoints;
+      if (receiver.docs.isNotEmpty) {
+        DocumentSnapshot receiverDoc =
+            receiver.docs.firstWhere((doc) => doc.id == receiverId);
+        receiverPoints = receiverDoc.get("value");
+      } else {
+        throw Exception('No se encontro esa cuenta');
+      }
+
+      debugPrint("-");
+
+      int newValue = receiverPoints + points;
+
+      final query = _collectionRef.where("id", isEqualTo: receiverId);
+      final querySnapshot = await query.get();
+
+      for (final doc in querySnapshot.docs) {
+        await doc.reference.update({"value": newValue});
+      }
+      WriteBatch batch = _firestore.batch();
+      batch.update(senderDoc.reference, {"value": senderPoints - points});
+
+      await batch.commit();
+
+      // Actualizar los puntos de ambas personas en una transacción
+    } catch (e) {
+      // Manejo de excepciones
+      throw Exception('No se pudo transferir los puntos: $e');
+    }
+  }
 }
+
+
 
 
  /* List buys = [];

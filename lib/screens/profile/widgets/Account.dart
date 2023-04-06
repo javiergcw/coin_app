@@ -1,4 +1,5 @@
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
+import 'package:coin_flutter/screens/profile/views/settings_accounts/AddPoints.dart';
 import 'package:coin_flutter/screens/profile/views/settings_accounts/Progress.dart';
 import 'package:coin_flutter/screens/profile/widgets/SectionProfile.dart';
 import 'package:coin_flutter/utils/res.dart';
@@ -47,6 +48,17 @@ class Accounts extends StatelessWidget {
             icon: Icons.line_axis_sharp,
             subtitle: 'Observa tus avances',
             title: 'Graficas',
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => QRScanner()));
+          },
+          child: const SectionProfile(
+            icon: Icons.change_circle,
+            subtitle: 'Intercambio de puntos',
+            title: 'Cambio',
           ),
         ),
       ],
