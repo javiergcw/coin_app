@@ -1,6 +1,5 @@
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
-import 'package:coin_flutter/screens/profile/views/settings_accounts/AddPoints.dart';
-import 'package:coin_flutter/screens/profile/views/settings_accounts/Progress.dart';
+import 'package:coin_flutter/screens/profile/views/settings_accounts/SendPoints.dart';
 import 'package:coin_flutter/screens/profile/widgets/SectionProfile.dart';
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
@@ -42,26 +41,7 @@ class Accounts extends StatelessWidget {
         GestureDetector(
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ProgressBar()));
-          },
-          child: const SectionProfile(
-            icon: Icons.line_axis_sharp,
-            subtitle: 'Observa tus avances',
-            title: 'Graficas',
-          ),
-        ),
-        Container(
-          width: MediaQuery.of(context).size.height,
-          height: 0.5,
-          decoration: BoxDecoration(
-            color: UIColors.gray,
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-        ),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => QRScanner()));
+                MaterialPageRoute(builder: (context) => const SendPoints()));
           },
           child: const SectionProfile(
             icon: Icons.change_circle,

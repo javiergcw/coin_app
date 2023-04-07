@@ -2,7 +2,6 @@
 
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
 import 'package:coin_flutter/screens/authentication/screens/Login.dart';
-import 'package:coin_flutter/screens/profile/views/settings_accounts/AddPoints.dart';
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

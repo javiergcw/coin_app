@@ -1,7 +1,6 @@
-import 'package:coin_flutter/screens/coins/coin.dart';
+import 'package:coin_flutter/screens/coins/screens/coin.dart';
 import 'package:coin_flutter/screens/home/screens/homePage.dart';
-import 'package:coin_flutter/screens/profile/profile.dart';
-import 'package:coin_flutter/screens/quizes/quizes.dart';
+import 'package:coin_flutter/screens/profile/screens/profile.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
@@ -16,9 +15,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
     HomePage(),
-    Quizes(),
-    Profile(),
-    Coin(),
+/*     QuizPage(), */
+    const Profile(),
+    const Coin(),
   ];
 
   @override
@@ -95,7 +94,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Icon(Icons.quiz_outlined),
+                        child: const Icon(Icons.person_2_sharp),
                       ),
                       const SizedBox(height: 4),
                       Container(
@@ -126,37 +125,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Icon(Icons.person_2_sharp),
-                      ),
-                      const SizedBox(height: 4),
-                      Container(
-                        height: 5,
-                        width: 5,
-                        decoration: BoxDecoration(
-                          color: _currentIndex == 2
-                              ? Colors.red
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  padding: const EdgeInsets.all(0),
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          color: _currentIndex == 3
-                              ? Colors.red
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
                         child: const Icon(Icons.cookie_outlined),
                       ),
                       const SizedBox(height: 4),
@@ -164,7 +132,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                         height: 5,
                         width: 5,
                         decoration: BoxDecoration(
-                          color: _currentIndex == 3
+                          color: _currentIndex == 2
                               ? Colors.red
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(10),

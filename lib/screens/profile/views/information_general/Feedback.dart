@@ -1,3 +1,5 @@
+import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
+
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,13 +13,14 @@ class FeedbackForm extends StatefulWidget {
 
 class _FeedbackFormState extends State<FeedbackForm> {
   final TextEditingController _case = TextEditingController();
-  String? gender;
+  String? option;
 
   int? _selectedIcon;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffE8F0F8),
       appBar: AppBar(
         title: const Text("Formulario"),
       ),
@@ -109,7 +112,7 @@ class _FeedbackFormState extends State<FeedbackForm> {
                       ],
                       controller: _case,
                       maxLines: 5,
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,14 +126,14 @@ class _FeedbackFormState extends State<FeedbackForm> {
                             children: [
                               Radio(
                                 value: "bug",
-                                groupValue: gender,
+                                groupValue: option,
                                 onChanged: (value) {
                                   setState(() {
-                                    gender = value.toString();
+                                    option = value.toString();
                                   });
                                 },
                               ),
-                              Text('Bug')
+                              const Text('Bug')
                             ],
                           ),
                         ),
@@ -138,10 +141,10 @@ class _FeedbackFormState extends State<FeedbackForm> {
                           children: [
                             Radio(
                               value: "Consulta",
-                              groupValue: gender,
+                              groupValue: option,
                               onChanged: (value) {
                                 setState(() {
-                                  gender = value.toString();
+                                  option = value.toString();
                                 });
                               },
                             ),
@@ -152,16 +155,16 @@ class _FeedbackFormState extends State<FeedbackForm> {
                           children: [
                             Radio(
                               value: "otros",
-                              groupValue: gender,
+                              groupValue: option,
                               onChanged: (value) {
                                 setState(
                                   () {
-                                    gender = value.toString();
+                                    option = value.toString();
                                   },
                                 );
                               },
                             ),
-                            Text("Otros"),
+                            const Text("Otros"),
                           ],
                         ),
                       ],
@@ -169,13 +172,26 @@ class _FeedbackFormState extends State<FeedbackForm> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (!_case.text.isEmpty &&
-                              gender != null &&
+                              option != null &&
                               _selectedIcon != null) {
                             debugPrint('Enviado');
+
+                            String? user = await ProviderState().getUserMail();
+
+                            ProviderState().guardarFormulario(
+                                _case.text,
+                                user.toString(),
+                                option.toString(),
+                                _selectedIcon.toString());
                           } else {
-                            debugPrint('Todos los campos son requeridos');
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content:
+                                    Text('Todos los campos son requeridos'),
+                              ),
+                            );
                           }
                         },
                         child: const Text('Enviar solicitud'),

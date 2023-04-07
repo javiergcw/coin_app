@@ -1,3 +1,4 @@
+import 'package:coin_flutter/screens/authentication/screens/forgotPassword.dart';
 import 'package:coin_flutter/screens/authentication/widgets/customButton.dart';
 import 'package:coin_flutter/screens/authentication/widgets/customRichText.dart';
 import 'package:coin_flutter/screens/authentication/widgets/customTextField.dart';
@@ -72,14 +73,22 @@ class _LoginState extends State<Login> {
                     hintText: 'Contraseña',
                     icon: Icons.lock,
                   ),
-                  Row(
-                    children: const [
-                      Spacer(),
-                      Text(
-                        'Se te ha olvidado la contraseña?',
-                        style: red,
-                      ),
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ForgotPassword()));
+                    },
+                    child: Row(
+                      children: const [
+                        Spacer(),
+                        Text(
+                          'Se te ha olvidado la contraseña?',
+                          style: red,
+                        ),
+                      ],
+                    ),
                   ),
                   customButton(
                     label: 'Ingresar',

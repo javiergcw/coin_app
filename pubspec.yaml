@@ -47,6 +47,8 @@ dependencies:
   shimmer: ^2.0.0
   qr_flutter: ^4.0.0
   syncfusion_flutter_charts: ^21.1.37
+  mailer: ^6.0.0
+  excel: ^2.1.0
 
 dev_dependencies:
   flutter_test:

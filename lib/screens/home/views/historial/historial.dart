@@ -4,11 +4,11 @@ import 'package:coin_flutter/screens/home/views/historial/widgets/BuysContainerI
 import 'package:coin_flutter/screens/home/views/historial/widgets/buildShimmerContainerHistorial.dart';
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class Buys extends StatelessWidget {
-  const Buys({super.key});
+  const Buys({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,18 +43,32 @@ class Buys extends StatelessWidget {
             ),
           );
         }
+
+        model.buysWithId.sort((a, b) {
+          if (a['status'] == "1" && b['status'] == "0") {
+            return -1; // Si a tiene status 1 y b tiene status 0, a debe ir primero.
+          } else if (a['status'] == "0" && b['status'] == "1") {
+            return 1; // Si a tiene status 0 y b tiene status 1, b debe ir primero.
+          } else {
+            DateTime aDate = a['date'].toDate();
+            DateTime bDate = b['date'].toDate();
+            return bDate.compareTo(aDate); // Orden descendente de fechas.
+          }
+        });
+
         return Visibility(
           visible: model.buysWithId.isNotEmpty,
           replacement: Center(
-              child: Column(
-            children: const [
-              Text('Compras'),
-              SizedBox(
-                height: 50,
-              ),
-              Text('No hay elementos para mostrar.')
-            ],
-          )),
+            child: Column(
+              children: const [
+                Text('Compras'),
+                SizedBox(
+                  height: 50,
+                ),
+                Text('No hay elementos para mostrar.')
+              ],
+            ),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -71,17 +85,17 @@ class Buys extends StatelessWidget {
                       .map(
                         (item) => item['status'] == "0"
                             ? BuyContainerInactive(
-                                date: DateFormat('dd/MM/yyyy')
-                                    .format(item['date'].toDate())
-                                    .toString(),
+                                date: DateFormat('dd/MM/yyyy').format(
+                                  item['date'].toDate(),
+                                ),
                                 product: item['name'],
                                 status: 'Sin reclamar',
                                 image: 'assets/images/${item['image']}.png',
                               )
                             : BuyContainerActive(
-                                date: DateFormat('dd/MM/yyyy')
-                                    .format(item['date'].toDate())
-                                    .toString(),
+                                date: DateFormat('dd/MM/yyyy').format(
+                                  item['date'].toDate(),
+                                ),
                                 product: item['name'],
                                 status: 'Reclamado',
                                 image: 'assets/images/${item['image']}.png',

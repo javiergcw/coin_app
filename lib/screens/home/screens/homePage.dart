@@ -1,4 +1,3 @@
-import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
 import 'package:coin_flutter/screens/home/views/historial/historial.dart';
 import 'package:coin_flutter/screens/home/views/rules/rules.dart';
 import 'package:coin_flutter/screens/home/views/shop/shop.dart';
@@ -8,7 +7,6 @@ import 'package:coin_flutter/screens/home/views/widgets/profileBar.dart';
 import 'package:coin_flutter/screens/home/views/widgets/textButtonCustom.dart';
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -22,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffE8F0F8),
+      backgroundColor: const Color(0xffE8F0F8),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(

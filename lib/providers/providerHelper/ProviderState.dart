@@ -166,6 +166,15 @@ class ProviderState extends ChangeNotifier {
     }
   }
 
+  Future<String?> getUserMail() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      return user.email;
+    } else {
+      throw Exception('No user logged in');
+    }
+  }
+
   Future<String> GetNameStudentSendPoints(UIDstudent) async {
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
     final CollectionReference _collectionRef = _firestore.collection('points');
@@ -245,6 +254,17 @@ class ProviderState extends ChangeNotifier {
     } catch (e) {
       // Manejo de excepciones
       throw Exception('No se pudo transferir los puntos: $e');
+    }
+  }
+
+  Future<void> guardarFormulario(
+      String body, String mail, String option, String status) async {
+    try {
+      await FirebaseFirestore.instance.collection('form').add(
+          {'body': body, 'mail': mail, 'option': option, 'status': status});
+      print('Formulario guardado correctamente');
+    } catch (e) {
+      print('Error al guardar el formulario: $e');
     }
   }
 }
