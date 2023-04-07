@@ -1,4 +1,6 @@
+import 'package:coin_flutter/screens/authentication/screens/Login.dart';
 import 'package:coin_flutter/utils/res.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LogOut extends StatelessWidget {
@@ -10,8 +12,12 @@ class LogOut extends StatelessWidget {
       children: [
         UISizedBox.gapH20,
         ElevatedButton(
-          onPressed: () {
-            // acción a realizar cuando se presiona el botón
+          onPressed: () async {
+            // Cerrar sesión del usuario actual
+            await FirebaseAuth.instance.signOut();
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Login()));
+            // Navegar a la vista de inicio de sesión
           },
           style: ElevatedButton.styleFrom(
             primary: Colors.red, // color de fondo del botón

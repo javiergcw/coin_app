@@ -3,7 +3,6 @@ import 'package:coin_flutter/screens/authentication/widgets/customButton.dart';
 import 'package:coin_flutter/screens/authentication/widgets/customRichText.dart';
 import 'package:coin_flutter/screens/authentication/widgets/customTextField.dart';
 import 'package:coin_flutter/screens/bottomNavigator/bottomNavigator.dart';
-import 'package:coin_flutter/screens/home/screens/homePage.dart';
 import 'package:coin_flutter/screens/authentication/screens/Register.dart';
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
 import 'package:coin_flutter/utils/res.dart';

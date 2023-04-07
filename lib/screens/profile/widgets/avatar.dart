@@ -1,3 +1,4 @@
+import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,25 @@ class Avatar extends StatefulWidget {
 }
 
 class _AvatarState extends State<Avatar> {
+  String? userEmail;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserEmail();
+  }
+
+  Future<void> getUserEmail() async {
+    try {
+      final String? email = await ProviderState().getUserMail();
+      setState(() {
+        userEmail = email;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,11 +41,16 @@ class _AvatarState extends State<Avatar> {
             shape: BoxShape.circle,
             color: Colors.red,
           ),
+          child: Image.asset(Assets.avatar01),
         ),
         UISizedBox.gapH10,
-        const Text(
-          'Javier Garcia',
-          style: subtitleBlack,
+        Center(
+          child: userEmail == null
+              ? const CircularProgressIndicator()
+              : Text(
+                  '$userEmail',
+                  style: subtitleBlack,
+                ),
         ),
         UISizedBox.gapH6,
         Container(
@@ -54,7 +79,7 @@ class _AvatarState extends State<Avatar> {
                 ),
                 UISizedBox.gapW10,
                 const Text(
-                  'Estudiante',
+                  'User Testing',
                   style: reqQ14,
                 ),
               ],

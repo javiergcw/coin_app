@@ -42,7 +42,7 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
               padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
               child: SingleChildScrollView(
                 child: Wrap(
-                  spacing: 40,
+                  runSpacing: 20,
                   children: [
                     Center(
                       child: Transform(
