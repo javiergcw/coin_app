@@ -53,266 +53,217 @@ class _SendPointsState extends State<SendPoints> {
     final model = Provider.of<ProviderState>(context, listen: false);
 
     return Scaffold(
-      backgroundColor: const Color(0xffE8F0F8),
       appBar: AppBar(
         title: const Text('Agregar puntos'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Wrap(
-          runSpacing: 20,
-          children: <Widget>[
-            FutureBuilder<void>(
-                future: model.getInfoUser(),
-                builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-                  if (snapshot.hasError) {
-                    return const Center(
-                      child: Text('Error al obtener datos de Firestore'),
-                    );
-                  }
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Shimmer.fromColors(
-                      baseColor: Colors.grey[300]!,
-                      highlightColor: Colors.grey[100]!,
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    height: 50,
-                                    width:
-                                        MediaQuery.of(context).size.width / 2.5,
-                                    color: Colors.white,
-                                  ),
-                                  UISizedBox.gapH20,
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 31,
-                                        width:
-                                            MediaQuery.of(context).size.height /
-                                                8,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
-                                      ),
-                                      UISizedBox.gapW10,
-                                      Container(
-                                        height: 31,
-                                        width: 31,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(50.0),
-                                          border: Border.all(
-                                            width: 2.0,
-                                            style: BorderStyle.solid,
-                                            color: Colors.transparent,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              Container(
-                                width: MediaQuery.of(context).size.width / 4.4,
-                                height: MediaQuery.of(context).size.width / 4.6,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 8,
-                                      offset: const Offset(0, 0),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-
-                  return Column(
-                    children: model.infoUserWithId
-                        .map(
-                          (item) => Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      const Text('Tus puntos:',
-                                          style: titleBlack),
-                                      Container(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Wrap(
+            runSpacing: 20,
+            children: <Widget>[
+              Center(
+                child: Image.asset(
+                  Assets.changeIsometric,
+                  width: 250,
+                ),
+              ),
+              FutureBuilder<void>(
+                  future: model.getInfoUser(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<void> snapshot) {
+                    if (snapshot.hasError) {
+                      return const Center(
+                        child: Text('Error al obtener datos de Firestore'),
+                      );
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Shimmer.fromColors(
+                        baseColor: Colors.grey[300]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    UISizedBox.gapH20,
+                                    Row(
+                                      children: [
+                                        Container(
                                           height: 31,
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .height /
                                               8,
                                           decoration: BoxDecoration(
-                                            gradient: const LinearGradient(
-                                              begin: Alignment.centerLeft,
-                                              end: Alignment.centerRight,
-                                              colors: [
-                                                UIColors.yellow,
-                                                UIColors.orange,
-                                              ],
-                                            ),
+                                            color: Colors.white,
                                             borderRadius:
                                                 BorderRadius.circular(20.0),
                                           ),
-                                          child: Row(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 5),
-                                                child: Container(
-                                                  height: 25,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20.0),
-                                                  ),
-                                                  child:
-                                                      Image.asset(Assets.coin),
-                                                ),
-                                              ),
-                                              const Spacer(),
-                                              Text(
-                                                '${item['value']}',
-                                                style: white12,
-                                              ),
-                                              UISizedBox.gapW20,
-                                            ],
-                                          )),
-                                      UISizedBox.gapW10,
-                                      GestureDetector(
-                                        child: Container(
-                                            height: 31,
-                                            width: 31,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(50.0),
-                                              border: Border.all(
-                                                width: 2.0,
-                                                style: BorderStyle.solid,
-                                                color: Colors.transparent,
-                                              ),
-                                              gradient: const LinearGradient(
-                                                colors: [
-                                                  UIColors.redQ,
-                                                  UIColors.redW,
-                                                ],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                                tileMode: TileMode.clamp,
-                                              ),
+                                        ),
+                                        UISizedBox.gapW10,
+                                        Container(
+                                          height: 31,
+                                          width: 31,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(50.0),
+                                            border: Border.all(
+                                              width: 2.0,
+                                              style: BorderStyle.solid,
+                                              color: Colors.transparent,
                                             ),
-                                            child: Image.asset(Assets.alert)),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
-                        .toList(),
-                  );
-                }),
-            TextField(
-              controller: _textEditingController,
-              enabled: !isRead,
-              decoration: const InputDecoration(
-                hintText: 'Valor del codigo QR',
-              ),
-            ),
-            TextField(
-              controller: _amount,
-              decoration: const InputDecoration(
-                hintText: 'Cantidad de puntos',
-              ),
-            ),
-            TextField(
-              maxLines: 3,
-              controller: _description,
-              decoration: const InputDecoration(
-                hintText: 'Descripción',
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                if (_textEditingController.text.isEmpty ||
-                    _amount.text.isEmpty ||
-                    _description.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Todos los campos son requeridos'),
-                    ),
-                  );
-                } else {
-                  try {
-                    String name = await provider.GetNameStudentSendPoints(
-                        _textEditingController.text);
-                    // ignore: use_build_context_synchronously
-                    bool confirm = await showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Confirmación'),
-                          content: Text(
-                              '¿Seguro que quieres enviarle puntos a $name?'),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, true),
-                              child: const Text('Sí'),
-                            ),
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, false),
-                              child: const Text('No'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ],
-                        );
-                      },
-                    );
-                    if (confirm) {
-                      debugPrint('Acepto');
-                      String sender = await provider.getUserId();
-                      // ignore: use_build_context_synchronously
-                      provider.transferPoints(
-                          context,
-                          _textEditingController.text,
-                          int.tryParse(_amount.text) ?? 0,
-                          sender);
+                        ),
+                      );
                     }
-                  } catch (e) {
-                    // Manejo de excepciones
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Usuario NO encontrado'),
-                      ),
+
+                    return Column(
+                      children: model.infoUserWithId
+                          .map(
+                            (item) => Row(
+                              children: [
+                                const Text('Tus puntos:', style: titleBlack),
+                                const Spacer(),
+                                Container(
+                                    height: 31,
+                                    width:
+                                        MediaQuery.of(context).size.height / 8,
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                        colors: [
+                                          UIColors.yellow,
+                                          UIColors.orange,
+                                        ],
+                                      ),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 5),
+                                          child: Container(
+                                            height: 25,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                            ),
+                                            child: Image.asset(Assets.coin),
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Text(
+                                          '${item['value']}',
+                                          style: white12,
+                                        ),
+                                        UISizedBox.gapW20,
+                                      ],
+                                    )),
+                              ],
+                            ),
+                          )
+                          .toList(),
                     );
-                  }
-                }
-              },
-              child: const Text('Enviar puntos'),
-            ),
-          ],
+                  }),
+              TextField(
+                controller: _textEditingController,
+                enabled: !isRead,
+                decoration: const InputDecoration(
+                  hintText: 'Valor del codigo QR',
+                ),
+              ),
+              TextField(
+                controller: _amount,
+                decoration: const InputDecoration(
+                  hintText: 'Cantidad de puntos',
+                ),
+              ),
+              TextField(
+                maxLines: 3,
+                controller: _description,
+                decoration: const InputDecoration(
+                  hintText: 'Descripción',
+                ),
+              ),
+              SizedBox(
+                height: 40,
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    if (_textEditingController.text.isEmpty ||
+                        _amount.text.isEmpty ||
+                        _description.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Todos los campos son requeridos'),
+                        ),
+                      );
+                    } else {
+                      try {
+                        String name = await provider.GetNameStudentSendPoints(
+                            _textEditingController.text);
+                        // ignore: use_build_context_synchronously
+                        bool confirm = await showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Confirmación'),
+                              content: Text(
+                                  '¿Seguro que quieres enviarle puntos a $name?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, true),
+                                  child: const Text('Sí'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, false),
+                                  child: const Text('No'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        if (confirm) {
+                          debugPrint('Acepto');
+                          String sender = await provider.getUserId();
+                          // ignore: use_build_context_synchronously
+                          provider.transferPoints(
+                              context,
+                              _textEditingController.text,
+                              int.tryParse(_amount.text) ?? 0,
+                              sender);
+                        }
+                      } catch (e) {
+                        // Manejo de excepciones
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Usuario NO encontrado'),
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  child: const Text('Enviar puntos'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

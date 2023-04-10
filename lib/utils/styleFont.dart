@@ -25,6 +25,29 @@ const titleBlack = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const titleBlack24 = TextStyle(
+  fontSize: 24,
+  color: UIColors.black,
+  fontWeight: FontWeight.bold,
+);
+
+const black15 = TextStyle(
+  fontSize: 15,
+  color: UIColors.black,
+);
+
+const Black30 = TextStyle(
+  fontSize: 30,
+  color: UIColors.black,
+  fontWeight: FontWeight.bold,
+);
+
+const Black35 = TextStyle(
+  fontSize: 35,
+  color: UIColors.black,
+  fontWeight: FontWeight.bold,
+);
+
 //////////////////////////////////
 
 const titleHistorial = TextStyle(
@@ -135,5 +158,7 @@ const reqQ14 = TextStyle(
 
 /////////
 const red = TextStyle(
+  fontSize: 14,
   color: UIColors.redMain,
+  fontWeight: FontWeight.w600,
 );

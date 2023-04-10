@@ -34,27 +34,30 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF1F4FF),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
-              child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Stack(
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 child: Wrap(
                   runSpacing: 20,
                   children: [
-                    Center(
-                      child: Transform(
-                        alignment: Alignment.center,
-                        transform: Matrix4.identity()..scale(-1.0, 1.0, 1.0),
-                        child: const Image(
-                          image: AssetImage(
-                            Assets.passwordIsometric,
-                          ),
-                          height: 200.0,
-                        ),
+                    const Image(
+                      image: AssetImage(
+                        Assets.registerIsometric,
                       ),
+                      height: 260.0,
+                    ),
+                    const Text(
+                      '¿Eres nuevo?',
+                      style: Black35,
+                    ),
+                    UISizedBox.gapH10,
+                    const Text(
+                      'Te invitamos a registrarte en CoinWrap',
+                      style: black15,
                     ),
                     CustomTextField(
                       icon: Icons.person,
@@ -87,8 +90,8 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

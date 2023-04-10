@@ -70,28 +70,41 @@ void _showQR(context) {
             maxChildSize: 0.55,
             expand: false,
             builder: (_, controller) {
-              return Column(
-                children: [
-                  Container(
-                    width: 40,
-                    height: 4,
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(10),
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 10,
+                      offset: Offset(0, -5),
                     ),
-                  ),
-                  const Text(
-                    'Tu QR',
-                    style: TitleContainerQuiz,
-                  ),
-                  UISizedBox.gapH10,
-                  QrImage(
-                    data: model.getUid!.toString(),
-                    version: QrVersions.auto,
-                    size: MediaQuery.of(context).size.height / 3,
-                  ),
-                ],
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 4,
+                      margin: const EdgeInsets.symmetric(vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    const Text(
+                      'Tu QR',
+                      style: TitleContainerQuiz,
+                    ),
+                    UISizedBox.gapH10,
+                    QrImage(
+                      data: model.getUid!.toString(),
+                      version: QrVersions.auto,
+                      size: MediaQuery.of(context).size.height / 3,
+                    ),
+                  ],
+                ),
               );
             },
           );

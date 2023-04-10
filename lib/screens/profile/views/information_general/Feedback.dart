@@ -20,7 +20,6 @@ class _FeedbackFormState extends State<FeedbackForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffE8F0F8),
       appBar: AppBar(
         title: const Text("Formulario"),
       ),
@@ -30,7 +29,6 @@ class _FeedbackFormState extends State<FeedbackForm> {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(10),
               ),
               width: double.infinity,
@@ -39,6 +37,13 @@ class _FeedbackFormState extends State<FeedbackForm> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Center(
+                      child: Image.asset(
+                        Assets.questionIsometric,
+                        width: 230,
+                      ),
+                    ),
+                    UISizedBox.gapH10,
                     const Text(
                       'Envianos tú comentario',
                       style: TitleContainerQuiz,
@@ -196,7 +201,7 @@ class _FeedbackFormState extends State<FeedbackForm> {
                         },
                         child: const Text('Enviar solicitud'),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

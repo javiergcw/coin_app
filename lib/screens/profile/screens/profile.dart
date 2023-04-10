@@ -16,7 +16,6 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: UIColors.background,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

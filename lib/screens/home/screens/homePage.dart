@@ -73,9 +73,17 @@ class _HomePageState extends State<HomePage> {
                                 onPressed: () {
                                   PopUp().MessageCoins(context);
                                 },
-                                child: const Icon(
-                                  Icons.tune,
-                                  color: UIColors.redQ,
+                                child: Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    color: UIColors.redQ,
+                                  ),
+                                  child: const Icon(
+                                    Icons.question_mark,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ],

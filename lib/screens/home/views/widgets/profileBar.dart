@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
+import 'package:coin_flutter/screens/home/views/widgets/popUp.dart';
 import 'package:coin_flutter/utils/res.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -144,6 +145,9 @@ class ProfileBar extends StatelessWidget {
                                   )),
                               UISizedBox.gapW10,
                               GestureDetector(
+                                onTap: () {
+                                  PopUp().MessageWhats(context);
+                                },
                                 child: Container(
                                     height: 31,
                                     width: 31,

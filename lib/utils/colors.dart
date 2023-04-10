@@ -13,6 +13,7 @@ abstract class UIColors {
   static const Color pink = Color(0xffFF3364);
 
   static const Color gray = Color(0xffB3B3B3);
+
   static const Color graySecondary = Color(0xff9E9E9E);
   static const Color grayThirdy = Color(0xff848484);
   static const Color grayFourthy = Color(0xff8E9092);
@@ -21,6 +22,7 @@ abstract class UIColors {
   static const Color graySeven = Color(0xff9C9CA1);
   static const Color grayEight = Color(0xffD0D0D0);
   static const Color grayNine = Color(0xff7A7A7A);
+  static const Color grayTen = Color(0xffF5F7F9);
 
   static const Color background = Color(0xffE8F0F8);
   static const Color black = Color(0xff282828);

@@ -22,6 +22,14 @@ class SectionProfile extends StatelessWidget {
               height: 40,
               width: 40,
               decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 4,
+                    offset: Offset(0, 2), // changes position of shadow
+                  ),
+                ],
                 borderRadius: BorderRadius.circular(50),
                 color: Colors.white,
               ),

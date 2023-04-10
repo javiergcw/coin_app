@@ -18,28 +18,47 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: UIColors.background,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              UISizedBox.gapH20,
-              CustomTextField(
-                icon: Icons.mail,
-                controller: email,
-                hintText: 'Correo eletronico',
-              ),
-              UISizedBox.gapH20,
-              customButton(
-                onPressed: () {
-                  resetPassword(email.text);
-                  /*   _signUp(
-                              email.text, password.text, firstn.text, context); */
-                },
-                label: 'Recuperar',
-              ),
-            ],
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                UISizedBox.gapH20,
+                UISizedBox.gapH20,
+                Center(
+                  child: Image.asset(
+                    Assets.psIsometric,
+                    width: 280,
+                  ),
+                ),
+                UISizedBox.gapH20,
+                UISizedBox.gapH20,
+                const Text(
+                  '¿Haz olvidado tu contraseña?',
+                  style: Black35,
+                ),
+                UISizedBox.gapH10,
+                const Text(
+                  'No te preocupes, suele ocurrir, ingrese la dirección asociada con su cuenta para recuperarla',
+                  style: black15,
+                ),
+                UISizedBox.gapH20,
+                CustomTextField(
+                  icon: Icons.mail,
+                  controller: email,
+                  hintText: 'Correo eletronico',
+                ),
+                UISizedBox.gapH20,
+                customButton(
+                  onPressed: () {
+                    resetPassword(email.text);
+                  },
+                  label: 'Recuperar',
+                ),
+              ],
+            ),
           ),
         ),
       ),

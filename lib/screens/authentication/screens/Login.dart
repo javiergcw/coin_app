@@ -37,65 +37,81 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF1F4FF),
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 80,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Wrap(
-                runSpacing: 25,
-                children: [
-                  const Center(
-                    child: Image(
-                      height: 200,
-                      image: AssetImage(
-                        Assets.loginIsometric,
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(),
+        child: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: <Widget>[
+                    UISizedBox.gapH40,
+                    UISizedBox.gapH40,
+                    UISizedBox.gapH40,
+                    Center(
+                      child: Image.asset(
+                        Assets.logoBanner,
+                        width: 280,
                       ),
                     ),
-                  ),
-                  CustomTextField(
-                    controller: email,
-                    hintText: 'Correo electronico',
-                    icon: Icons.mail,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  CustomTextField(
-                    obscureText: true,
-                    controller: password,
-                    hintText: 'Contraseña',
-                    icon: Icons.lock,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ForgotPassword()));
-                    },
-                    child: Row(
-                      children: const [
-                        Spacer(),
-                        Text(
-                          'Se te ha olvidado la contraseña?',
+                    UISizedBox.gapH20,
+                    UISizedBox.gapH20,
+                    const Center(
+                      child: Text(
+                        'Inicia sesión',
+                        style: Black30,
+                      ),
+                    ),
+                    UISizedBox.gapH20,
+                    UISizedBox.gapH10,
+                    CustomTextField(
+                      controller: email,
+                      hintText: 'Correo electronico',
+                      icon: Icons.mail,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomTextField(
+                      obscureText: true,
+                      controller: password,
+                      hintText: 'Contraseña',
+                      icon: Icons.lock,
+                    ),
+                    UISizedBox.gapH20,
+                    customButton(
+                      label: 'Ingresar',
+                      onPressed: () {
+                        _Login(email.text, password.text, context);
+                      },
+                    ),
+                    UISizedBox.gapH30,
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ForgotPassword()));
+                        },
+                        child: const Text(
+                          '¿Se te ha olvidado la contraseña?',
                           style: red,
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                  customButton(
-                    label: 'Ingresar',
-                    onPressed: () {
-                      _Login(email.text, password.text, context);
-                    },
-                  ),
-                  customRichText(
+                  ],
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height,
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 30),
+                  child: customRichText(
                     fLabel: '¿Eres nuevo? ',
                     sLabel: 'registrate ahora',
                     onTap: () {
@@ -105,12 +121,12 @@ class _LoginState extends State<Login> {
                               builder: (context) => ProviderRegistration()));
                     },
                   ),
-                ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }
