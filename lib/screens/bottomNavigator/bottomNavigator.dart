@@ -1,6 +1,6 @@
-import 'package:coin_flutter/screens/coins/screens/coin.dart';
-import 'package:coin_flutter/screens/home/screens/homePage.dart';
-import 'package:coin_flutter/screens/profile/screens/profile.dart';
+import 'package:CoinWrap/screens/coins/screens/coin.dart';
+import 'package:CoinWrap/screens/home/screens/homePage.dart';
+import 'package:CoinWrap/screens/profile/screens/profile.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {

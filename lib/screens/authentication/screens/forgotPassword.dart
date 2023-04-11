@@ -1,6 +1,6 @@
-import 'package:coin_flutter/screens/authentication/widgets/customButton.dart';
-import 'package:coin_flutter/screens/authentication/widgets/customTextField.dart';
-import 'package:coin_flutter/utils/res.dart';
+import 'package:CoinWrap/screens/authentication/widgets/customButton.dart';
+import 'package:CoinWrap/screens/authentication/widgets/customTextField.dart';
+import 'package:CoinWrap/utils/res.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';

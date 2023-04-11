@@ -1,4 +1,4 @@
-import 'package:coin_flutter/utils/res.dart';
+import 'package:CoinWrap/utils/res.dart';
 import 'package:flutter/material.dart';
 
 class ImageCarousel extends StatefulWidget {
@@ -6,12 +6,14 @@ class ImageCarousel extends StatefulWidget {
   final List<String> titles;
   final List<String> subtitles;
   final List<String> body;
+  final List<IconData> icon;
 
   ImageCarousel({
     required this.imageUrls,
     required this.titles,
     required this.subtitles,
     required this.body,
+    required this.icon,
   });
 
   @override
@@ -67,6 +69,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
     final title = widget.titles[_currentIndex];
     final subtitle = widget.subtitles[_currentIndex];
     final body = widget.body[_currentIndex];
+    final icon = widget.icon[_currentIndex];
 
     return TweenAnimationBuilder<double>(
       duration: Duration(milliseconds: 500),
@@ -92,29 +95,39 @@ class _ImageCarouselState extends State<ImageCarousel> {
                     height: 44,
                     width: 44,
                     decoration: BoxDecoration(
-                      color: UIColors.gray,
+                      color: UIColors.redMain,
                       borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(
+                      icon,
+                      color: Colors.white,
                     ),
                   ),
                   UISizedBox.gapW10,
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        subtitle,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
+                  SizedBox(
+                    width: MediaQuery.of(context).size.height / 2.8,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          subtitle,
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
               UISizedBox.gapH20,
-              Text(body)
+              Text(
+                body,
+                textAlign: TextAlign.justify,
+              )
             ],
           ),
         ),

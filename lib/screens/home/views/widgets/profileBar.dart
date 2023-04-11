@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
-import 'package:coin_flutter/screens/home/views/widgets/popUp.dart';
-import 'package:coin_flutter/utils/res.dart';
+import 'package:CoinWrap/providers/providerHelper/ProviderState.dart';
+import 'package:CoinWrap/screens/home/views/widgets/popUp.dart';
+import 'package:CoinWrap/utils/res.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';

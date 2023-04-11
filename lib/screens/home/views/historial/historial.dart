@@ -1,8 +1,8 @@
-import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
-import 'package:coin_flutter/screens/home/views/historial/widgets/BuysContainer.dart';
-import 'package:coin_flutter/screens/home/views/historial/widgets/BuysContainerInactive.dart';
-import 'package:coin_flutter/screens/home/views/historial/widgets/buildShimmerContainerHistorial.dart';
-import 'package:coin_flutter/utils/res.dart';
+import 'package:CoinWrap/providers/providerHelper/ProviderState.dart';
+import 'package:CoinWrap/screens/home/views/historial/widgets/BuysContainer.dart';
+import 'package:CoinWrap/screens/home/views/historial/widgets/BuysContainerInactive.dart';
+import 'package:CoinWrap/screens/home/views/historial/widgets/buildShimmerContainerHistorial.dart';
+import 'package:CoinWrap/utils/res.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

@@ -1,7 +1,7 @@
-import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
-import 'package:coin_flutter/screens/profile/views/settings_accounts/SendPoints.dart';
-import 'package:coin_flutter/screens/profile/widgets/SectionProfile.dart';
-import 'package:coin_flutter/utils/res.dart';
+import 'package:CoinWrap/providers/providerHelper/ProviderState.dart';
+import 'package:CoinWrap/screens/profile/views/settings_accounts/SendPoints.dart';
+import 'package:CoinWrap/screens/profile/widgets/SectionProfile.dart';
+import 'package:CoinWrap/utils/res.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';

@@ -1,8 +1,8 @@
-import 'package:coin_flutter/screens/authentication/screens/Login.dart';
-import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
-import 'package:coin_flutter/screens/authentication/widgets/customButton.dart';
-import 'package:coin_flutter/screens/authentication/widgets/customTextField.dart';
-import 'package:coin_flutter/utils/res.dart';
+import 'package:CoinWrap/screens/authentication/screens/Login.dart';
+import 'package:CoinWrap/providers/providerHelper/ProviderState.dart';
+import 'package:CoinWrap/screens/authentication/widgets/customButton.dart';
+import 'package:CoinWrap/screens/authentication/widgets/customTextField.dart';
+import 'package:CoinWrap/utils/res.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

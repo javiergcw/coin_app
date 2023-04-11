@@ -1,6 +1,6 @@
-import 'package:coin_flutter/screens/profile/views/information_general/Feedback.dart';
-import 'package:coin_flutter/screens/profile/widgets/SectionProfile.dart';
-import 'package:coin_flutter/utils/res.dart';
+import 'package:CoinWrap/screens/profile/views/information_general/Feedback.dart';
+import 'package:CoinWrap/screens/profile/widgets/SectionProfile.dart';
+import 'package:CoinWrap/utils/res.dart';
 import 'package:flutter/material.dart';
 
 class GeneralInfo extends StatelessWidget {

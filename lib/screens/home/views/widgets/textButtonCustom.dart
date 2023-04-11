@@ -1,4 +1,4 @@
-import 'package:coin_flutter/utils/res.dart';
+import 'package:CoinWrap/utils/res.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextButton extends StatelessWidget {

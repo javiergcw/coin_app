@@ -1,5 +1,5 @@
-import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
-import 'package:coin_flutter/utils/res.dart';
+import 'package:CoinWrap/providers/providerHelper/ProviderState.dart';
+import 'package:CoinWrap/utils/res.dart';
 import 'package:flutter/material.dart';
 
 class Avatar extends StatefulWidget {

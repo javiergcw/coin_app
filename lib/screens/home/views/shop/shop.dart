@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:coin_flutter/providers/providerHelper/ProviderState.dart';
-import 'package:coin_flutter/screens/home/views/shop/finish.dart';
-import 'package:coin_flutter/screens/home/views/shop/widgets/containerReward.dart';
-import 'package:coin_flutter/screens/home/views/shop/widgets/containerRewardsPrecargado.dart';
-import 'package:coin_flutter/screens/home/views/widgets/popUp.dart';
-import 'package:coin_flutter/services/firebase_service.dart';
-import 'package:coin_flutter/utils/res.dart';
+import 'package:CoinWrap/providers/providerHelper/ProviderState.dart';
+import 'package:CoinWrap/screens/home/views/shop/finish.dart';
+import 'package:CoinWrap/screens/home/views/shop/widgets/containerReward.dart';
+import 'package:CoinWrap/screens/home/views/shop/widgets/containerRewardsPrecargado.dart';
+import 'package:CoinWrap/screens/home/views/widgets/popUp.dart';
+import 'package:CoinWrap/services/firebase_service.dart';
+import 'package:CoinWrap/utils/res.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

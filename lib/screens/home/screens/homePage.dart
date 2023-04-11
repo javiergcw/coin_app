@@ -1,11 +1,11 @@
-import 'package:coin_flutter/screens/home/views/historial/historial.dart';
-import 'package:coin_flutter/screens/home/views/rules/rules.dart';
-import 'package:coin_flutter/screens/home/views/shop/shop.dart';
-import 'package:coin_flutter/screens/home/views/widgets/line.dart';
-import 'package:coin_flutter/screens/home/views/widgets/popUp.dart';
-import 'package:coin_flutter/screens/home/views/widgets/profileBar.dart';
-import 'package:coin_flutter/screens/home/views/widgets/textButtonCustom.dart';
-import 'package:coin_flutter/utils/res.dart';
+import 'package:CoinWrap/screens/home/views/historial/historial.dart';
+import 'package:CoinWrap/screens/home/views/rules/rules.dart';
+import 'package:CoinWrap/screens/home/views/shop/shop.dart';
+import 'package:CoinWrap/screens/home/views/widgets/line.dart';
+import 'package:CoinWrap/screens/home/views/widgets/popUp.dart';
+import 'package:CoinWrap/screens/home/views/widgets/profileBar.dart';
+import 'package:CoinWrap/screens/home/views/widgets/textButtonCustom.dart';
+import 'package:CoinWrap/utils/res.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {

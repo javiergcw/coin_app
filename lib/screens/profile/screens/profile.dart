@@ -1,8 +1,8 @@
-import 'package:coin_flutter/screens/profile/widgets/Account.dart';
-import 'package:coin_flutter/screens/profile/widgets/GeneralInfo.dart';
-import 'package:coin_flutter/screens/profile/widgets/LogOut.dart';
-import 'package:coin_flutter/screens/profile/widgets/avatar.dart';
-import 'package:coin_flutter/utils/res.dart';
+import 'package:CoinWrap/screens/profile/widgets/Account.dart';
+import 'package:CoinWrap/screens/profile/widgets/GeneralInfo.dart';
+import 'package:CoinWrap/screens/profile/widgets/LogOut.dart';
+import 'package:CoinWrap/screens/profile/widgets/avatar.dart';
+import 'package:CoinWrap/utils/res.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {

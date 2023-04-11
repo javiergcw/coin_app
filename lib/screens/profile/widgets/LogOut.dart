@@ -1,5 +1,5 @@
-import 'package:coin_flutter/screens/authentication/screens/Login.dart';
-import 'package:coin_flutter/utils/res.dart';
+import 'package:CoinWrap/screens/authentication/screens/Login.dart';
+import 'package:CoinWrap/utils/res.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
